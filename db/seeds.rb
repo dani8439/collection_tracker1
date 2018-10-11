@@ -1,16 +1,16 @@
 user1 = User.create(:username => "BaublesBaloo", :email => "Baubles@hotmail.com", :password => "Woof!"),
 user2 = User.create(:username => "FalafelMonster", :email => "Challabackyoungin@aol.com", :password => "harruu")
 
-pattern1 = Pattern.create(name: "Toast & Marmalade", theme: "Toast & Marmalade"),
-pattern2 = Pattern.create(name: "Cambridge Blue Toast", theme: "Toast & Marmalade"),
-pattern3 = Pattern.create(name: "Blue Skies", theme: "Toast & Marmalade"),
-pattern4 = Pattern.create(name: "Starry Toast", theme: "Toast & Marmalade"),
-pattern5 = Pattern.create(name: "Polka Dot", theme: "Polka Dot"),
-pattern6 = Pattern.create(name: "Starry Skies", theme: "Blues"),
-pattern7 = Pattern.create(name: "Blue Shells", theme: "Blues"),
-pattern8 = Pattern.create(name: "Utility", theme: "Blues"),
-pattern9 = Pattern.create(name: "Tiny Scattered Rose", theme: "Pinks"),
-pattern10 = Pattern.create(name: "Love & Kisses", theme: "Pinks")
+pattern1 = Pattern.create(name: "Toast & Marmalade", quantity: "1"),
+pattern2 = Pattern.create(name: "Cambridge Blue Toast", quantity: "2"),
+pattern3 = Pattern.create(name: "Blue Skies", quantity: "1"),
+pattern4 = Pattern.create(name: "Starry Toast", quantity: "3"),
+pattern5 = Pattern.create(name: "Polka Dot", quantity: "2"),
+pattern6 = Pattern.create(name: "Starry Skies", quantity: "3"),
+pattern7 = Pattern.create(name: "Blue Shells", quantity: "1"),
+pattern8 = Pattern.create(name: "Utility", quantity: "4"),
+pattern9 = Pattern.create(name: "Tiny Scattered Rose", quantity: "3"),
+pattern10 = Pattern.create(name: "Love & Kisses", quantity: "10")
 
 piece1 = Piece.create(name: "Jug", size: "1/4 Pint"),
 piece2 = Piece.create(name: "Bowl", size: "French"),
