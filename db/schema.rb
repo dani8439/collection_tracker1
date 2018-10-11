@@ -11,31 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181011181534) do
-
-  create_table "collections", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "pattern_id"
-    t.integer "piece_id"
-    t.integer "quantity"
-  end
-
-  create_table "patterns", force: :cascade do |t|
-    t.string  "name"
-    t.string  "theme"
-    t.integer "user_id"
-  end
-
-  create_table "pieces", force: :cascade do |t|
-    t.string  "name"
-    t.string  "size"
-    t.integer "user_id"
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.string "email"
-    t.string "password_digest"
-  end
+ActiveRecord::Schema.define(version: 0) do
 
 end
