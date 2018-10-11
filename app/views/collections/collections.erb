@@ -1,7 +1,15 @@
 <h1>Halloo</h1>
 
-<% @collection.patterns %>
-<% @collection.pieces %>
+<% @user.patterns.each do |pattern| %>
+<ol>
+  <li><%= pattern.pattern_name %></li>
+</ol>
+<% end %>
+<% @user.pieces.each do |piece| %>
+<ol>
+  <li><%= piece.quantity %> <%= piece.piece_name %></li>
+</ol>
+<% end %>
 
 <br><br>
 <a href="/logout">Log Out</a>

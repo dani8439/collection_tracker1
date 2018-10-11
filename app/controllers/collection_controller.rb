@@ -11,5 +11,11 @@ class CollectionController < ApplicationController
   end
 
   get '/collections/:id' do
+    if logged_in?
+      @collection = Collection.find_by_id(params[:id])
+      erb :'/collections/show_collection'
+    else
+      redirect :'/login'
+    end
   end
 end
