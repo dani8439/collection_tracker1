@@ -11,26 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181010192550) do
+ActiveRecord::Schema.define(version: 20181011181534) do
 
   create_table "collections", force: :cascade do |t|
-    t.string  "user_id"
+    t.integer "user_id"
+    t.integer "pattern_id"
     t.integer "piece_id"
-    t.string  "piece_name"
-    t.string  "pattern_name"
-    t.string  "quantity"
+    t.integer "quantity"
   end
 
   create_table "patterns", force: :cascade do |t|
-    t.string "name"
-    t.string "theme"
-    t.string "user_id"
+    t.string  "name"
+    t.string  "theme"
+    t.integer "user_id"
   end
 
   create_table "pieces", force: :cascade do |t|
-    t.string "name"
-    t.string "size"
-    t.string "user_id"
+    t.string  "name"
+    t.string  "size"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
