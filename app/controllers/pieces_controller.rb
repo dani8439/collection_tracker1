@@ -59,9 +59,9 @@ class PiecesController < ApplicationController
   end
 
   delete '/pieces/:id/delete' do
-    @piece = Piece.find_by_id(params[:id])
     if logged_in?
-      if @piece && @piece.user == current_user
+      @piece = Piece.find_by_id(params[:id])
+      if @piece && @piece.user_id == session[:user_id]
         @piece.delete
       end
       redirect :'/pieces'
