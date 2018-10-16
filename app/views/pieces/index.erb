@@ -4,7 +4,7 @@
 
 <% Piece.all.each do |piece| %>
 <ul>
-  <li><%= piece.quantity %> - <%= piece.size %> <%= piece.name %>(s)</li>
+  <li><%= piece.quantity %> <%= piece.pattern %> <%= piece.size %> <%= piece.name %>(s)</li>
 </ul>
 <% end %>
 
