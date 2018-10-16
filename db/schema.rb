@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20181010192550) do
     t.string  "name"
     t.string  "size"
     t.integer "quantity"
+    t.string  "pattern"
   end
 
   create_table "users", force: :cascade do |t|

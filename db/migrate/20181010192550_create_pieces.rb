@@ -4,6 +4,7 @@ class CreatePieces < ActiveRecord::Migration
       t.string :name
       t.string :size
       t.integer :quantity
+      t.string :pattern
     end
   end
 end
