@@ -1,0 +1,17 @@
+<h1>Edit Piece:</h1>
+
+<form action="/pieces/<%= @piece.id %>" method="POST">
+  <input type="hidden" name="_method" value="PATCH">
+  <label for="piece_name">Edit Name: <input type="text" name="name" id="piece_name" value="<%= @piece.name %>"></label>
+  <label for="piece_size">Edit Size: <input type="text" name="size" id="piece_size" value="<%= @piece.size %>"></label>
+  <label for="piece_pattern">Edit Pattern: <input type="text" name="pattern" id="piece_pattern" value="<%= @piece.pattern %>"></label>
+  <label for="piece_quantity">Edit Quantity: <input type="text" name="quantity" id="piece_quantity" value="<%= @piece.quantity%>"></label>
+
+  <br></br>
+
+  <input type="submit" value="Update Piece">
+</form>
+
+<br></br>
+
+<a href="/">Home</a>

@@ -50,13 +50,23 @@ class PiecesController < ApplicationController
 
   patch '/pieces/:id' do
     @piece = Piece.find_by_id(params[:id])
-    @piece.update(params[:piece])
-    @piece.save
-
-    redirect :"/pieces/#{@piece.id}"
+    if !params[:name].empty?
+      @piece.update(name: params[:name], size: params[:size], quantity: params[:quantity], pattern: params[:pattern])
+      redirect :"/pieces/#{@piece.id}"
+    else
+      redirect :"/pieces/#{@piece.id}/edit"
+    end
   end
 
   delete '/pieces/:id/delete' do
     @piece = Piece.find_by_id(params[:id])
+    if logged_in?
+      if @piece && @piece.user == current_user
+        @piece.delete
+      end
+      redirect :'/pieces'
+    else
+      redirect :'/login'
+    end
   end
 end
