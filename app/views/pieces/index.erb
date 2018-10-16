@@ -1,0 +1,12 @@
+<h1>Hello <%= @user.username%>!</h1>
+
+<h2>Here is your collection</h2>
+
+<% Piece.all.each do |piece| %>
+<ul>
+  <li><%= piece.quantity %> - <%= piece.size %> <%= piece.name %>(s)</li>
+</ul>
+<% end %>
+
+
+<a href="/logout">Log Out </a><br>
