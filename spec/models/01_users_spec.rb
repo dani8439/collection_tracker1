@@ -3,6 +3,10 @@ require 'spec_helper'
 describe 'User' do
   before do
     @user = User.create(:username => "BaublesBaloo", :email => "Baubles@hotmail.com", :password => "Woof!")
+    @piece = Piece.create(:name => "Jug", :size => "1/4 Pint", :quantity => "1", :pattern => "Tiny Pink Flowers")
+
+    @user.pieces << @piece
+
   end
 
   it 'can initialize a user' do
@@ -17,6 +21,10 @@ describe 'User' do
    expect(@user.authenticate("yarr")).to eq(false)
 
    expect(@user.authenticate("Woof!")).to eq(@user)
+ end
+
+ it "can have many pieces" do
+   expect(@user.pieces.count).to eq(1)
  end
 
 end
