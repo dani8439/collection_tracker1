@@ -6,8 +6,6 @@ if ActiveRecord::Migrator.needs_migration?
 end
 
 use Rack::MethodOverride
-use CollectionController
 use UsersController
 use PiecesController
-use PatternsController
 run ApplicationController

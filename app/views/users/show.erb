@@ -1,0 +1,18 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<h1>Welcome <%= @user.username %></h1>
+
+<h2>Here is your collection: </h2>
+
+<% @user.pieces.each do |piece| %>
+<ul>
+  <li><a href="/pieces/<%= piece.id %>"><%= piece.quantity%> <%= piece.size %> <%= piece.name %></li>
+</ul>
+<% end %>
+
+
+<br></br>
+<a href="/pieces/new">Add a new piece </a><br>
+<a href="/logout">Log Out </a><br>
