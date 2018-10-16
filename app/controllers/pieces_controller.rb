@@ -44,7 +44,7 @@ class PiecesController < ApplicationController
       @piece.user_id = current_user.id
       @piece.save
       flash[:message] = "Successfully created piece."
-      erb :"pieces/#{@piece.id}"
+      redirect :"/pieces/#{@piece.id}"
     end
   end
 
@@ -53,7 +53,7 @@ class PiecesController < ApplicationController
     @piece.update(params[:piece])
     @piece.save
 
-    redirect :"pieces/#{@piece.id}"
+    redirect :"/pieces/#{@piece.id}"
   end
 
   delete '/pieces/:id/delete' do

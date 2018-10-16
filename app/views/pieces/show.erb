@@ -1,1 +1,23 @@
-<h1>Hiya <%= @user.username%></h1>
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<h2>Piece Name: <%= @piece.name %></h2>
+<br>
+<h2>Size: <%= @piece.size %></h2>
+<br>
+<h2>Pattern: <%= @piece.pattern %></h2>
+<br>
+<h2>Quantity: <%= @piece.quantity%></h2>
+
+<a href="/pieces/<%= @piece.id %>/edit">Edit Piece </a>
+<br></br>
+
+<form action="/pieces/<%=@piece.id%>/delete" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" id="submit" value="Delete Piece">
+</form>
+
+<br></br>
+<a href="/pieces/show">See Your Collection</a><br>
+<a href="/logout">Logout</a><br>
