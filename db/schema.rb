@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20181017175230) do
   create_table "pieces", force: :cascade do |t|
     t.string  "name"
     t.string  "size"
-    t.string  "quantity"
+    t.integer "quantity"
     t.integer "user_id"
   end
 

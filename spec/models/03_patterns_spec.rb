@@ -17,4 +17,8 @@ describe 'Pattern' do
     expect(@pattern.name).to eq("Utility")
   end
 
+  it "can have many pieces" do
+    expect(@pattern.pieces.count).to eq(1)
+  end
+
 end

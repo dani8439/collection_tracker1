@@ -29,8 +29,12 @@ class PatternsController < ApplicationController
 
 
   get '/patterns/:id/edit' do
-    @pattern = Pattern.find_by_id(params[:id])
-    erb :'patterns/edit'
+    if logged_in?
+      @pattern = Pattern.find_by_id(params[:id])
+      erb :'patterns/edit'
+    else
+      redirect :'/login'
+    end
   end
 
   post '/patterns' do
