@@ -1,3 +1,4 @@
 class Pattern < ActiveRecord::Base
-  belongs_to :piece
+  has_many :piece_patterns
+  has_many :pieces, through: :piece_patterns
 end

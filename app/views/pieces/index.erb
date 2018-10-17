@@ -4,7 +4,7 @@
 
 <% Piece.all.each do |piece| %>
 <ul>
-  <li><a href="/pieces/<%= piece.id %>"><%= piece.size %> <%= piece.name %>(s)</li>
+  <li><a href="/pieces/<%= piece.id %>"><%= piece.quantity%> <%= piece.size %> <%= piece.name %>(s)</li>
 </ul>
 <% end %>
 

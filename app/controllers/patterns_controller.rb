@@ -29,6 +29,8 @@ class PatternsController < ApplicationController
 
 
   get '/patterns/:id/edit' do
+    @pattern = Pattern.find_by_id(params[:id])
+    erb :'patterns/edit'
   end
 
   post '/patterns' do
@@ -44,6 +46,8 @@ class PatternsController < ApplicationController
   end
 
   patch '/patterns/:id' do
+    @pattern = Pattern.find_by_id(params[:id])
+    @pattern.update(params[:pattern])
   end
 
   delete '/patterns/:id/delete' do

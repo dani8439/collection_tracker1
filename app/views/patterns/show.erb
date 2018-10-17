@@ -4,7 +4,12 @@
 
 <h2>Pattern Name: <%= @pattern.name %><h2>
 
-
+<h3>Pieces:<h3>
+  <% @pattern.pieces.each do |piece| %>
+    <p><a href="/pieces/<%= piece.id %>"><%= piece.name %></a></p>
+  <% end %>
+  
+<br></br>
 
 <a href="/patterns/new">Add Another Pattern</a><br>
 <a href="/pieces/new">Add Another Piece</a><br>
