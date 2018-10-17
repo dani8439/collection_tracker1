@@ -2,6 +2,7 @@ class PatternsController < ApplicationController
 
   get '/patterns' do
     @pattern = Pattern.all
+    @user = User.find_by(params[:id])
     if logged_in?
       erb :'/patterns/index'
     else
@@ -10,6 +11,11 @@ class PatternsController < ApplicationController
   end
 
   get '/patterns/new' do
+    if logged_in?
+      erb :'patterns/new'
+    else
+      redirect :'/login'
+    end
   end
 
   get '/patterns/:id' do
