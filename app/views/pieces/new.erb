@@ -3,6 +3,13 @@
 <form action="/pieces" method="POST">
   <label for="piece_name">Name: <input type="text" name="name" id="piece_name"></label>
   <label for="piece_size">Size: <input type="text" name="size" id="piece_size"></label>
+  <br></br>
+  <label>Patterns: </label>
+  <br></br>
+  <% Pattern.all.each do |pattern| %>
+    <input type="checkbox" name="patterns[]" value="<%= pattern.id %>" id="<%= pattern.name %>"><%= pattern.name %></input>
+  <% end %>
+  <br></br>
   <input type="submit" value="Create Piece">
 </form>
 
