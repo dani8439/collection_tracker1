@@ -19,7 +19,14 @@ class PatternsController < ApplicationController
   end
 
   get '/patterns/:id' do
+    if logged_in?
+      @pattern = Pattern.find_by_id(params[:id])
+      erb :'patterns/show'
+    else
+      redirect :'/login'
+    end
   end
+
 
   get '/patterns/:id/edit' do
   end

@@ -37,10 +37,10 @@ class PiecesController < ApplicationController
   end
 
   post '/pieces' do
-    if params[:name] == "" || params[:size] == "" || params[:quantity] == ""
+    if params[:name] == "" || params[:size] == ""
       redirect :'/pieces/new'
     else
-      @piece = Piece.create(name: params[:name], size: params[:size], quantity: params[:quantity])
+      @piece = Piece.create(name: params[:name], size: params[:size])
       @piece.user_id = current_user.id
       @piece.save
       flash[:message] = "Successfully created piece."
@@ -51,7 +51,7 @@ class PiecesController < ApplicationController
   patch '/pieces/:id' do
     @piece = Piece.find_by_id(params[:id])
     if !params[:name].empty?
-      @piece.update(name: params[:name], size: params[:size], quantity: params[:quantity])
+      @piece.update(name: params[:name], size: params[:size])
       redirect :"/pieces/#{@piece.id}"
     else
       redirect :"/pieces/#{@piece.id}/edit"

@@ -1,0 +1,12 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<h2>Pattern Name: <%= @pattern.name %></h2>
+<h2>Quantity: <%= @pattern.quantity %><h2>
+
+
+<a href="/patterns/new">Add Another Pattern</a><br>
+<a href="/pieces/new">Add Another Piece</a><br>
+<a href="/pieces">See Your Collection</a><br>
+<a href="/logout">Logout</a><br>

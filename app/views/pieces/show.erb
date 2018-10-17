@@ -6,7 +6,13 @@
 <br>
 <h2>Size: <%= @piece.size %></h2>
 <br>
-<h2>Quantity: <%= @piece.quantity%></h2>
+
+<h3>Patterns</h3>
+<% @piece.patterns.each do |pattern| %>
+<ul>
+  <li><a href="/patterns/<%= pattern.id %>"><% pattern.name %></li>
+</ul>
+<% end %>
 
 <a href="/pieces/<%= @piece.id %>/edit">Edit Piece </a>
 <br></br>
