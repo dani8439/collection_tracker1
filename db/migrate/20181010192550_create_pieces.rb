@@ -3,7 +3,7 @@ class CreatePieces < ActiveRecord::Migration
     create_table :pieces do |t|
       t.string :name
       t.string :size
-      t.integer :quantity
+      # t.integer :quantity
       t.integer :user_id
     end
   end
