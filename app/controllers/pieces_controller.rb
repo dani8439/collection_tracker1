@@ -1,3 +1,5 @@
+require 'pry'
+
 class PiecesController < ApplicationController
 
   get '/pieces' do
@@ -37,11 +39,12 @@ class PiecesController < ApplicationController
   end
 
   post '/pieces' do
+    # binding.pry
     if params[:name] == "" || params[:size] == "" || params["quantity"] == ""
       redirect :'/pieces/new'
     else
       @piece = Piece.create(name: params[:name], size: params[:size], quantity: params[:quantity])
-      # @piece.pattern = Pattern.find_or_create_by(name: params[:pattern_name])
+      @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name])
       @piece.pattern_ids = params[:patterns]
       @piece.user_id = current_user.id
       @piece.save
@@ -51,9 +54,11 @@ class PiecesController < ApplicationController
   end
 
   patch '/pieces/:id' do
+    binding.pry
     @piece = Piece.find_by_id(params[:id])
     if !params[:name].empty?
       @piece.update(name: params[:name], size: params[:size], quantity: params[:quantity])
+      @piece.patterns << Pattern.create(name: params[:pattern][:name])
       @piece.pattern_ids = params[:patterns]
       @piece.save
       redirect :"/pieces/#{@piece.id}"
