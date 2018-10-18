@@ -42,7 +42,7 @@ class PatternsController < ApplicationController
       redirect :'/patterns/new'
     else
       @pattern = Pattern.create(name: params[:name])
-      @pattern.user_id = current_user.id
+      # @pattern.user_id = current_user.id
       @pattern.save
       flash[:message] = "Successfully created pattern."
       redirect :"/patterns/#{@pattern.id}"

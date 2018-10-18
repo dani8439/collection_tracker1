@@ -4,10 +4,14 @@
 
 <% Piece.all.each do |piece| %>
 <ul>
-  <li><a href="/pieces/<%= piece.id %>"><%= piece.quantity%> <%= piece.size %> <%= piece.name %>(s)</li>
+  <li><a href="/pieces/<%= piece.id %>"><%= piece.size %> <%= piece.name %></li><br>
+    <% piece.patterns.each do |pattern| %>
+    <ul>
+      <li> <%= pattern.name %></li>
+    </ul>
+    <% end %>
 </ul>
 <% end %>
-
 
 <a href="/pieces/new">Add a New Piece</a><br>
 <a href="/patterns/new">Add a New Pattern</a></br>
