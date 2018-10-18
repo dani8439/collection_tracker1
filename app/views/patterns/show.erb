@@ -6,7 +6,7 @@
 
 <h3>Pieces:<h3>
   <% @pattern.pieces.each do |piece| %>
-    <p><a href="/pieces/<%= piece.id %>"><%= piece.quantity %>-<%= piece.size %> <%= piece.name %></a></p>
+    <p><a href="/pieces/<%= piece.id %>"><%= piece.size %> <%= piece.name %></a></p>
   <% end %>
 
 <br></br>

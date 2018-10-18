@@ -38,7 +38,7 @@ class PatternsController < ApplicationController
   end
 
   post '/patterns' do
-    if params[:name] == ""
+    if params[:name] == "" || params[:quantity] == ""
       redirect :'/patterns/new'
     else
       @pattern = Pattern.create(name: params[:name])
