@@ -66,12 +66,33 @@ class PiecesController < ApplicationController
       @piece.update(name: params[:name], size: params[:size])
       @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
       @piece.pattern_ids = params[:patterns]
+      @piece.user_id = current_user.id
       @piece.save
-      redirect :"/pieces/#{@piece.id}"
     else
-      redirect :"/pieces/#{@piece.id}/edit"
+      @piece.pattern_ids = params[:patterns]
+      @piece.user_id = current_user.id
+      @piece.save
     end
+    redirect :"/pieces/#{@piece.id}"
   end
+  # patch '/pieces/:id' do
+  #   # binding.pry
+  #   @piece = Piece.find_by_id(params[:id])
+  #   if !params[:name].empty?
+  #     @piece.update(name: params[:name], size: params[:size])
+  #     @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+  #     @piece.pattern_ids = params[:patterns]
+  #     @piece.save
+  #   else
+  #     @piece.pattern_ids = params[:patterns]
+  #     @piece.user_id = current_user.id
+  #     @piece.save
+  #   end
+  #     redirect :"/pieces/#{@piece.id}"
+  #   else
+  #     redirect :"/pieces/#{@piece.id}/edit"
+  #   end
+  # end
 
   delete '/pieces/:id/delete' do
     if logged_in?
