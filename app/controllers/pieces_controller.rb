@@ -8,6 +8,7 @@ class PiecesController < ApplicationController
     if logged_in?
       erb :'/pieces/index'
     else
+      flash[:message] = "You must login first."
       redirect :'/'
     end
   end
@@ -41,9 +42,10 @@ class PiecesController < ApplicationController
   post '/pieces' do
     # binding.pry
     if params[:name] == "" || params[:size] == ""
+      flash[:message] = "Please do not leave any fields blank."
       redirect :'/pieces/new'
     else
-      @piece = Piece.create(name: params[:name], size: params[:size])
+      @piece = current_user.pieces.create(name: params[:name], size: params[:size])
       if !params[:pattern][:name].empty?
         @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
         @piece.pattern_ids = params[:patterns]

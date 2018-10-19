@@ -59,6 +59,19 @@ class PatternsController < ApplicationController
     @pattern.update(params[:pattern])
   end
 
+  # patch '/pieces/:id' do
+  #   # binding.pry
+  #   @piece = Piece.find_by_id(params[:id])
+  #   @piece.update(name: params[:name], size: params[:size])
+  #   if !params[:name].empty?
+  #     @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+  #     @piece.pattern_ids = params[:patterns]
+  #     @piece.user_id = current_user.id
+  #     @piece.save
+  #   end
+  #   redirect :"/pieces/#{@piece.id}"
+  # end
+
   delete '/patterns/:id/delete' do
     if logged_in?
       @pattern = Pattern.find_by_id(params[:id])
