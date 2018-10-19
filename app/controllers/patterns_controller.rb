@@ -45,8 +45,9 @@ class PatternsController < ApplicationController
       @pattern = Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
       if !params[:piece][:name].empty?
         @pattern.pieces << Piece.find_or_create_by(name: params[:piece][:name], size: params[:piece][:size])
+        @pattern.user_id = current_user.id
       end
-      @pattern.user_id = current_user.id
+      # @pattern.user_id = current_user.id
       @pattern.save
       flash[:message] = "Successfully created pattern."
       redirect :"/patterns/#{@pattern.id}"
@@ -59,5 +60,14 @@ class PatternsController < ApplicationController
   end
 
   delete '/patterns/:id/delete' do
+    if logged_in?
+      @pattern = Pattern.find_by_id(params[:id])
+      if @pattern && @pattern.user_id == session[:user_id]
+        @pattern.delete
+      end
+      redirect :'/patterns'
+    else
+      redirect :'/login'
+    end
   end
 end

@@ -13,6 +13,13 @@
 </ul>
 <% end %>
 
+<% Pattern.all.each do |pattern| %>
+  <ul>
+    <li><a href="/patterns/<%= pattern.id %>"><%= pattern.name %></li>
+  </ul>
+<% end %>
+<br></br>
+
 <a href="/pieces/new">Add a New Piece</a><br>
 <a href="/patterns/new">Add a New Pattern</a></br>
 <a href="/logout">Log Out </a><br>
