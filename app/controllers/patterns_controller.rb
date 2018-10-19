@@ -39,9 +39,10 @@ class PatternsController < ApplicationController
 
   post '/patterns' do
     if params[:name] == "" || params[:quantity] == ""
+      flash[:message] = "You need to fill in all fields to create a Pattern."
       redirect :'/patterns/new'
     else
-      @pattern = Pattern.create(name: params[:name])
+      @pattern = Pattern.create(name: params[:name], quantity: params[:quantity])
       # @pattern.user_id = current_user.id
       @pattern.save
       flash[:message] = "Successfully created pattern."

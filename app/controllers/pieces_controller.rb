@@ -45,54 +45,29 @@ class PiecesController < ApplicationController
     else
       @piece = Piece.create(name: params[:name], size: params[:size])
       if !params[:pattern][:name].empty?
-        @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-        @piece.pattern_ids = params[:patterns]
-        @piece.user_id = current_user.id
-        @piece.save
-      else
-        @piece.pattern_ids = params[:patterns]
-        @piece.user_id = current_user.id
-        @piece.save
+        @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+        # @piece.pattern_ids = params[:patterns]
+        # @piece.user_id = current_user.id
       end
-      flash[:message] = "Successfully created piece."
-      redirect :"/pieces/#{@piece.id}"
+      @piece.save
+      flash[:message] = "Successfully create piece."
+      redirect :"pieces/#{@piece.id}"
     end
   end
 
   patch '/pieces/:id' do
     # binding.pry
     @piece = Piece.find_by_id(params[:id])
+    @piece.update(name: params[:name], size: params[:size])
     if !params[:name].empty?
-      @piece.update(name: params[:name], size: params[:size])
       @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-      @piece.pattern_ids = params[:patterns]
-      @piece.user_id = current_user.id
-      @piece.save
-    else
       @piece.pattern_ids = params[:patterns]
       @piece.user_id = current_user.id
       @piece.save
     end
     redirect :"/pieces/#{@piece.id}"
   end
-  # patch '/pieces/:id' do
-  #   # binding.pry
-  #   @piece = Piece.find_by_id(params[:id])
-  #   if !params[:name].empty?
-  #     @piece.update(name: params[:name], size: params[:size])
-  #     @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-  #     @piece.pattern_ids = params[:patterns]
-  #     @piece.save
-  #   else
-  #     @piece.pattern_ids = params[:patterns]
-  #     @piece.user_id = current_user.id
-  #     @piece.save
-  #   end
-  #     redirect :"/pieces/#{@piece.id}"
-  #   else
-  #     redirect :"/pieces/#{@piece.id}/edit"
-  #   end
-  # end
+
 
   delete '/pieces/:id/delete' do
     if logged_in?
