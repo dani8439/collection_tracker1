@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20181017175230) do
     t.string  "name"
     t.integer "quantity"
     t.integer "piece_id"
+    t.integer "user_id"
   end
 
   create_table "piece_patterns", force: :cascade do |t|

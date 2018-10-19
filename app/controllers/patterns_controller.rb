@@ -42,8 +42,11 @@ class PatternsController < ApplicationController
       flash[:message] = "You need to fill in all fields to create a Pattern."
       redirect :'/patterns/new'
     else
-      @pattern = Pattern.create(name: params[:name], quantity: params[:quantity])
-      # @pattern.user_id = current_user.id
+      @pattern = Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+      if !params[:piece][:name].empty?
+        @pattern.pieces << Piece.find_or_create_by(name: params[:piece][:name], size: params[:piece][:size])
+      end
+      @pattern.user_id = current_user.id
       @pattern.save
       flash[:message] = "Successfully created pattern."
       redirect :"/patterns/#{@pattern.id}"

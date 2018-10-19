@@ -4,10 +4,17 @@
   <label for="pattern_name">Pattern Name: <input type="text" name="pattern[name]" id="pattern_name"></label>
   <label for="pattern_quantity">Quantity: <input type="text" name="patterm[quantity]" id="pattern_quantity"></label>
   <br></br>
+  
   <h2>Available Pieces</h2>
   <% Piece.all.each do |piece| %>
     <input type="checkbox" name="piece[name]" id="<%= piece.id %>" value="<%= piece.id%>"><%= piece.size %> <%= piece.name %></input><br>
   <% end %>
+
+  <br></br>
+  <h2>Create New Piece:</h2>
+  <label for="new_piece">Name: <input type="text" name="piece[name]" id="new_piece"></label>
+  <label for="new_size">Size: <input type="text" name="piece[size]" id="new_size"></label>
+  <br></br>
 
   <input type="submit" value="Create Pattern">
 </form>

@@ -4,6 +4,7 @@ class CreatePatterns < ActiveRecord::Migration
       t.string :name
       t.integer :quantity
       t.integer :piece_id
+      t.integer :user_id
     end
   end
 end
