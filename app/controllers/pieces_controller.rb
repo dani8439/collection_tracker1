@@ -3,9 +3,9 @@ require 'pry'
 class PiecesController < ApplicationController
 
   get '/pieces' do
-    @piece = Piece.all
-    @user = User.find_by(params[:id])
     if logged_in?
+    @piece = Piece.all
+    @user = User.find_by(params[:user_id])
       erb :'/pieces/index'
     else
       flash[:message] = "You must login."
@@ -50,10 +50,16 @@ class PiecesController < ApplicationController
       if params[:pattern][:name].empty?
         @piece.pattern_ids = params[:patterns]
         @piece.patterns.quantity = params[:pattern][:quantity]
+        @piece.user_id = current_user.id
         @piece.save
       else
         if !Pattern.all.include?(@pattern)
           @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+          @piece.pattern_ids = params[:patterns]
+          @piece.user_id = current_user.id
+          @piece.save
+        else
+          @piece.patterns.quantity = params[:pattern][:quantity]
           @piece.pattern_ids = params[:patterns]
           @piece.user_id = current_user.id
           @piece.save

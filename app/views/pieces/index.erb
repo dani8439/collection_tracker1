@@ -1,4 +1,4 @@
-<h1>Hello <%= @user.username%>!</h1>
+<h1>Hello <%= current_user.username%>!</h1>
 
 <h2>Here is your collection</h2>
 
@@ -7,7 +7,7 @@
   <li><a href="/pieces/<%= piece.id %>"><%= piece.size %> <%= piece.name %></li><br>
     <% piece.patterns.each do |pattern| %>
     <ul>
-      <li><%= pattern.name %>(<%= pattern.quantity%>)</li>
+      <li><%= pattern.name %>-<%= pattern.quantity%></li>
     </ul>
     <% end %>
 </ul>

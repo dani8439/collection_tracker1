@@ -19,5 +19,10 @@
 </form>
 
 <br></br>
+<% if flash.has?(:message) %>
+<%= flash[:message] %>
+<% end %>
+<br></br>
+
 
 <a href="/pieces">Home</a>
