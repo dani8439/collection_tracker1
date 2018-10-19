@@ -78,7 +78,7 @@ class PatternsController < ApplicationController
       if @pattern && @pattern.user_id == session[:user_id]
         @pattern.delete
       end
-      redirect :'/patterns'
+      redirect :'/pieces'
     else
       redirect :'/login'
     end
