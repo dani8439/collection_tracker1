@@ -1,6 +1,3 @@
-<% if flash.has?(:message) %>
-  <%= flash[:message] %>
-<% end %>
 
 <h2>Piece Name: <%= @piece.name %></h2>
 <br>
@@ -21,6 +18,12 @@
   <input id="hidden" type="hidden" name="_method" value="DELETE">
   <input type="submit" id="submit" value="Delete Piece">
 </form>
+
+<br></br>
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+<br></br>
 
 <a href="/pieces/new">Add Another Piece</a><br>
 <a href="/patterns/new">Add Another Pattern</a><br>
