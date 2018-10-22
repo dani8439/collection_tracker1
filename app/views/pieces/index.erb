@@ -1,8 +1,8 @@
-<h1>Hello <%= @user.username%>!</h1>
+<h1>Hello <%= current_user.username%>!</h1>
 
 <h2>Here is your collection</h2>
 
-<% @user.pieces.all.each do |piece| %>
+<% Piece.all.each do |piece| %>
 <ul>
   <li><a href="/pieces/<%= piece.id %>"><%= piece.size %> <%= piece.name %></li><br>
     <% piece.patterns.each do |pattern| %>
