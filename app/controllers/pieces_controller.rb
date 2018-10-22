@@ -47,12 +47,12 @@ class PiecesController < ApplicationController
       redirect :'/pieces/new'
     else
       @piece = Piece.create(name: params[:name], size: params[:size])
-      @pattern = params[:pattern][:name]
+      @pattern = Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
       if params[:pattern][:name].empty?
-        if Pattern.all.include?(@pattern)
-          @pattern.quantity = params[:pattern][:quantity]
-          @pattern.save
-        end
+        @pattern.quantity = params[:pattern][:quantity]
+        @pattern.user_id = current_user.id
+        @pattern.save
+      else
         @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
         @piece.pattern_ids = params[:patterns]
         @piece.user_id = current_user.id
@@ -63,37 +63,6 @@ class PiecesController < ApplicationController
     end
   end
 
-  # post '/pieces' do
-  #   # binding.pry
-  #   if params[:name] == "" || params[:size] == ""
-  #     flash[:message] = "Please do not leave any fields blank."
-  #     redirect :'/pieces/new'
-  #   else
-  #     @piece = Piece.create(name: params[:name], size: params[:size])
-  #     @pattern = params[:pattern][:name]
-  #     if params[:pattern][:name].empty?
-  #       @piece.patterns = Pattern.find_or_create_by(params[:pattern][:name])
-  #       @piece.pattern_ids = params[:patterns]
-  #       @piece.patterns.quantity = params[:pattern][:quantity]
-  #       @piece.user_id = current_user.id
-  #       @piece.save
-  #     else
-  #       if !Pattern.all.include?(@pattern)
-  #         @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-  #         @piece.pattern_ids = params[:patterns]
-  #         @piece.user_id = current_user.id
-  #         @piece.save
-  #       else
-  #         @piece.patterns.quantity = params[:pattern][:quantity]
-  #         @piece.pattern_ids = params[:patterns]
-  #         @piece.user_id = current_user.id
-  #         @piece.save
-  #       end
-  #     end
-  #     flash[:message] = "Successfully create piece."
-  #     redirect :"pieces/#{@piece.id}"
-  #   end
-  # end
 
   patch '/pieces/:id' do
     # binding.pry
