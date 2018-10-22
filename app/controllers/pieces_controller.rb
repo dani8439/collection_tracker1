@@ -35,6 +35,7 @@ class PiecesController < ApplicationController
       @piece = Piece.find_by_id(params[:id])
       erb :'/pieces/edit'
     else
+      flash[:message] = "You only have access to edit your own pieces."
       redirect :'/login'
     end
   end
@@ -48,6 +49,7 @@ class PiecesController < ApplicationController
       @piece = Piece.create(name: params[:name], size: params[:size])
       @pattern = params[:pattern][:name]
       if params[:pattern][:name].empty?
+        # @piece.patterns = Pattern.find_or_create_by(params[:pattern][:name])
         @piece.pattern_ids = params[:patterns]
         @piece.patterns.quantity = params[:pattern][:quantity]
         @piece.user_id = current_user.id
@@ -74,11 +76,15 @@ class PiecesController < ApplicationController
     # binding.pry
     @piece = Piece.find_by_id(params[:id])
     @piece.update(name: params[:name], size: params[:size])
+    @pattern = Pattern.find_by_id(params[:id])
     if !params[:name].empty?
       @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
       @piece.pattern_ids = params[:patterns]
       @piece.user_id = current_user.id
       @piece.save
+    else
+      @pattern.quantity = params[:pattern][:quantity]
+      @piece.patterns.save
     end
     redirect :"/pieces/#{@piece.id}"
   end
