@@ -15,6 +15,7 @@ class PiecesController < ApplicationController
 
   get '/pieces/new' do
     if logged_in?
+      @user = User.find_by(params[:user_id])
       erb :'pieces/new'
     else
       redirect :'/login'
@@ -48,13 +49,13 @@ class PiecesController < ApplicationController
     else
       @piece = Piece.create(name: params[:name], size: params[:size])
       if !params[:pattern][:name].empty?
-        @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-        @piece.pattern_ids = params[:patterns]
+        @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+        # @piece.pattern_ids = params[:patterns]
         @piece.user_id = current_user.id
       else
-        @pattern.quantity = params[:pattern][:quantity]
         @piece.pattern_ids = params[:patterns]
         @piece.user_id = current_user.id
+      #   @pattern.quantity = params[:pattern][:quantity]
       end
       @piece.save
       flash[:message] = "Succesfully created piece."
@@ -65,12 +66,13 @@ class PiecesController < ApplicationController
 
   patch '/pieces/:id' do
     # binding.pry
+    @user = User.find_by(params[:user_id])
     @piece = Piece.find_by_id(params[:id])
     @piece.update(name: params[:name], size: params[:size])
     @pattern = Pattern.find_by_id(params[:id])
-    if !params[:name].empty?
+    if !params[:pattern][:name].empty?
       @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-      @piece.pattern_ids = params[:patterns]
+      # @piece.pattern_ids = params[:patterns]
       @piece.user_id = current_user.id
       @piece.save
     else

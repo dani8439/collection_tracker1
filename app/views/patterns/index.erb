@@ -1,6 +1,12 @@
 <h1>Hello <%= @user.username%>!</h1>
 
-<h2>Here is your collection</h2>
+<h2>Here are your Patterns</h2>
+
+<% @user.patterns.each do |pattern| %>
+<ul>
+  <li><a href="/patterns/<%= pattern.id %>"><%= pattern.name %> </li><br>
+</ul>
+<% end %>
 
 
 
