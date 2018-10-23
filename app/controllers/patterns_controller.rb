@@ -33,6 +33,7 @@ class PatternsController < ApplicationController
       @pattern = Pattern.find_by_id(params[:id])
       erb :'patterns/edit'
     else
+      flash[:message] = "You only have access to your Patterns."
       redirect :'/login'
     end
   end
@@ -56,26 +57,16 @@ class PatternsController < ApplicationController
 
   patch '/patterns/:id' do
     @pattern = Pattern.find_by_id(params[:id])
-    @pattern.update(params[:pattern])
+    @pattern.update(name: params[:name], quantity: params[:quantity])
+
+    redirect :"patterns/#{@pattern.id}"
   end
 
-  # patch '/pieces/:id' do
-  #   # binding.pry
-  #   @piece = Piece.find_by_id(params[:id])
-  #   @piece.update(name: params[:name], size: params[:size])
-  #   if !params[:name].empty?
-  #     @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-  #     @piece.pattern_ids = params[:patterns]
-  #     @piece.user_id = current_user.id
-  #     @piece.save
-  #   end
-  #   redirect :"/pieces/#{@piece.id}"
-  # end
 
   delete '/patterns/:id/delete' do
     if logged_in?
       @pattern = Pattern.find_by_id(params[:id])
-      if @pattern && @pattern.user_id == session[:user_id]
+      if @pattern && current_user.id == session[:user_id]
         @pattern.delete
       end
       redirect :'/pieces'

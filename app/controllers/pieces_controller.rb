@@ -36,7 +36,7 @@ class PiecesController < ApplicationController
       @piece = Piece.find_by_id(params[:id])
       erb :'/pieces/edit'
     else
-      flash[:message] = "You only have access to edit your own pieces."
+      flash[:message] = "You only have access to edit your own Pieces."
       redirect :'/login'
     end
   end
