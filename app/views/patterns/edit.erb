@@ -1,0 +1,17 @@
+<h1>Edit Pattern:</h1>
+
+<form action="/patterns/<%= @pattern.id %>" method="POST">
+  <input type="hidden" name="_method" value="PATCH">
+  <label for="pattern_name">Edit Name: <input type="text" name="pattern[name]" value="<%= @pattern.name %>"></label>
+  <label for="pattern_quantity">Edit Quantity: <input type="text" name="pattern[quantity]" value="<%= @pattern.quantity %>"></label>
+  <br><br>
+
+  <input type="submit" value="Update Pattern">
+</form>
+
+
+<br></br>
+<% if flash.has?(:message) %>
+<%= flash[:message] %>
+<% end %>
+<br></br>
