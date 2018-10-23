@@ -47,17 +47,16 @@ class PiecesController < ApplicationController
       redirect :'/pieces/new'
     else
       @piece = Piece.create(name: params[:name], size: params[:size])
-      @pattern = Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-      if params[:pattern][:name].empty?
-        @pattern.quantity = params[:pattern][:quantity]
-        @pattern.user_id = current_user.id
-        @pattern.save
-      else
+      if !params[:pattern][:name].empty?
         @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
         @piece.pattern_ids = params[:patterns]
         @piece.user_id = current_user.id
-        @piece.save
+      else
+        @pattern.quantity = params[:pattern][:quantity]
+        @piece.pattern_ids = params[:patterns]
+        @piece.user_id = current_user.id
       end
+      @piece.save
       flash[:message] = "Succesfully created piece."
       redirect :"/pieces/#{@piece.id}"
     end

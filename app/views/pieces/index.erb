@@ -2,8 +2,8 @@
 
 <h2>Here is your collection</h2>
 
-<% @pieces = current_user.pieces %>
-<% @pieces.each do |piece| %>
+
+<% @user.pieces.each do |piece| %>
 <ul>
   <li><a href="/pieces/<%= piece.id %>"><%= piece.size %> <%= piece.name %></li><br>
     <% piece.patterns.each do |pattern| %>
