@@ -9,6 +9,11 @@
 <% @user.pieces.each do |piece| %>
 <ul>
   <li><a href="/pieces/<%= piece.id %>"><%= piece.size %> <%= piece.name %></li>
+    <% piece.patterns.each do |pattern| %>
+    <ul>
+      <li><%= pattern.name %>-<%= pattern.quantity %></li>
+    </ul>
+    <% end %>
 </ul>
 <% end %>
 

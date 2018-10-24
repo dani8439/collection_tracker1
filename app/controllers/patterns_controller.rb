@@ -39,14 +39,16 @@ class PatternsController < ApplicationController
   end
 
   post '/patterns' do
+    binding.pry
     if params[:name] == "" || params[:quantity] == ""
       flash[:message] = "You need to fill in all fields to create a Pattern."
       redirect :'/patterns/new'
     else
       @pattern = Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+      @pieces = Piece.all
       if !params[:piece][:name].empty?
         @pattern.piece_ids = params[:pieces]
-        @pattern.pieces << Piece.find_or_create_by(name: params[:piece][:name], size: params[:piece][:size])
+        @pieces << Piece.find_or_create_by(name: params[:piece][:name], size: params[:piece][:size])
         @pattern.user_id = current_user.id
       else
         @pattern.piece_ids = params[:pieces]
