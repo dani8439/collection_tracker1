@@ -1,7 +1,6 @@
 <h2>Pattern Name: <%= @pattern.name %><h2>
 
 <h3>Pieces:<h3>
-  <% @patterns = current_user.patterns %> 
   <% @pattern.pieces.each do |piece| %>
     <p><a href="/pieces/<%= piece.id %>"><%= piece.size %> <%= piece.name %></a></p>
   <% end %>
