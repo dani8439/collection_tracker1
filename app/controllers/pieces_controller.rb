@@ -4,7 +4,7 @@ class PiecesController < ApplicationController
 
   get '/pieces' do
     if logged_in?
-    @user = User.find_by_id(params[:user_id])
+    @user = User.find_by_id(params[:id])
     @piece = Piece.all
       erb :'/pieces/index'
     else
@@ -71,14 +71,15 @@ class PiecesController < ApplicationController
     @piece.update(name: params[:name], size: params[:size])
     @pattern = Pattern.find_by_id(params[:id])
     if !params[:pattern][:name].empty?
+      @piece.pattern_ids = params[:patterns]
       @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-      # @piece.pattern_ids = params[:patterns]
       @piece.user_id = current_user.id
       @piece.save
     elsif !params[:pattern][:quantity].empty?
+      @piece.pattern_ids = params[:patterns]
       @pattern.quantity = params[:pattern][:quantity]
-      # @piece.patterns << Pattern.find_or_create_by(params[:patterns])
-      @piece.patterns.save
+      @pattern.save
+      @piece.save
     end
     redirect :"/pieces/#{@piece.id}"
   end

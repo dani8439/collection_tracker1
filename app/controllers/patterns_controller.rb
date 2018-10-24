@@ -45,10 +45,13 @@ class PatternsController < ApplicationController
     else
       @pattern = Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
       if !params[:piece][:name].empty?
+        @pattern.piece_ids = params[:pieces]
         @pattern.pieces << Piece.find_or_create_by(name: params[:piece][:name], size: params[:piece][:size])
         @pattern.user_id = current_user.id
+      else
+        @pattern.piece_ids = params[:pieces]
+        @pattern.user_id = current_user.id
       end
-      # @pattern.user_id = current_user.id
       @pattern.save
       flash[:message] = "Successfully created pattern."
       redirect :"/patterns/#{@pattern.id}"

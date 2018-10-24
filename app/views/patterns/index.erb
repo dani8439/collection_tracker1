@@ -1,8 +1,10 @@
-<h1>Hello <%= @user.username%>!</h1>
+<h1>Hello <%= current_user.username%>!</h1>
 
 <h2>Here are your Patterns</h2>
 
-<% @user.patterns.each do |pattern| %>
+
+<% @patterns = current_user.patterns %>
+<% @patterns.each do |pattern| %>
 <ul>
   <li><a href="/patterns/<%= pattern.id %>"><%= pattern.name %> </li><br>
 </ul>
@@ -12,4 +14,5 @@
 
 <a href="/pieces/new">Add a New Piece</a><br>
 <a href="/patterns/new">Add a New Pattern</a></br>
+<a href="/pieces">See Your Collection</a><br>
 <a href="/logout">Log Out </a><br>

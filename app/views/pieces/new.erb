@@ -6,7 +6,8 @@
   <br></br>
   <label>Patterns: </label>
   <br></br>
-  <% Pattern.all.each do |pattern| %>
+  <% @patterns = current_user.patterns %>
+  <% @patterns.each do |pattern| %>
     <input type="checkbox" name="patterns[]" value="<%= pattern.id %>" id="<%= pattern.name %>"><%= pattern.name %></input>
   <% end %>
   <br></br>
@@ -23,5 +24,6 @@
 <% end %>
 
 <br></br>
+<a href="/patterns">See Your Patterns</a><br>
 <a href="/pieces">See Your Collection</a><br>
 <a href="/logout">Logout</a><br>

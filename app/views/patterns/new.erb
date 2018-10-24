@@ -6,7 +6,8 @@
   <br></br>
 
   <h2>Available Pieces</h2>
-  <% Piece.all.each do |piece| %>
+  <% @pieces = current_user.patterns %>
+  <% @pieces.each do |piece| %>
     <input type="checkbox" name="piece[name]" id="<%= piece.id %>" value="<%= piece.id%>"><%= piece.size %> <%= piece.name %></input><br>
   <% end %>
 
