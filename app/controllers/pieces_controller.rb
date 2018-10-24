@@ -74,8 +74,9 @@ class PiecesController < ApplicationController
       # @piece.pattern_ids = params[:patterns]
       @piece.user_id = current_user.id
       @piece.save
-    else
+    elsif !params[:pattern][:quantity].empty?
       @pattern.quantity = params[:pattern][:quantity]
+      # @piece.patterns << Pattern.find_or_create_by(params[:patterns])
       @piece.patterns.save
     end
     redirect :"/pieces/#{@piece.id}"
