@@ -4,8 +4,8 @@ class PiecesController < ApplicationController
 
   get '/pieces' do
     if logged_in?
+    @user = User.find_by_id(params[:user_id])
     @piece = Piece.all
-    @user = User.find_by(params[:user_id])
       erb :'/pieces/index'
     else
       flash[:message] = "You must login."
@@ -49,6 +49,7 @@ class PiecesController < ApplicationController
     else
       @piece = Piece.create(name: params[:name], size: params[:size])
       if !params[:pattern][:name].empty?
+        @piece.pattern_ids = params[:patterns]
         @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
         @piece.user_id = current_user.id
       else
