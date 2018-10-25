@@ -44,6 +44,9 @@ class PatternsController < ApplicationController
       flash[:message] = "You need to fill in all fields to create a Pattern."
       redirect :'/patterns/new'
     else
+      # user.patterns.build(name: params[:pattern][:name], quantity: params[:pattern][:quantity]) ???
+      # can this be done as a way to correct error in patterns index view - without user_id as attribute of patterns, can do user.patterns 
+      # without, cannot build associations?? How to fix?
       @pattern = Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
       # @pieces = Piece.all
       # if !params[:piece][:name].empty?
