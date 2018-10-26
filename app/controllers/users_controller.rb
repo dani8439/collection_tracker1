@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   get '/login' do
     if logged_in?
+      @user = current_user.pieces.build(name: params[:name], size: params[:size])
       redirect :'/pieces'
     else
       erb :'users/login'

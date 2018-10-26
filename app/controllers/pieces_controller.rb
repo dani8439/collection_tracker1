@@ -47,7 +47,7 @@ class PiecesController < ApplicationController
       flash[:message] = "Please do not leave any fields blank."
       redirect :'/pieces/new'
     else
-      @piece = Piece.create(name: params[:name], size: params[:size])
+      @piece = current_user.pieces.build(name: params[:name], size: params[:size])
       if !params[:pattern][:name].empty?
         @piece.pattern_ids = params[:patterns]
         @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
