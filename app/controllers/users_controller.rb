@@ -39,7 +39,6 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       @user.save
       redirect :'/pieces'
-      # redirect :"users/#{@user.id}"
     end
   end
 
@@ -49,7 +48,6 @@ class UsersController < ApplicationController
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect :'/pieces'
-      # redirect :"users/#{@user.id}"
     else
       flash[:message] = "Something looks wrong with your info. Please try again, or signup to create an account."
       redirect :'/login'

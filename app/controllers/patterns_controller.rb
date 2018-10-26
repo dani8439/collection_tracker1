@@ -1,8 +1,8 @@
 class PatternsController < ApplicationController
 
   get '/patterns' do
-    @pattern = Pattern.all
     @user = User.find_by(params[:id])
+    @pattern = @user.patterns
     if logged_in?
       erb :'/patterns/index'
     else
@@ -21,6 +21,7 @@ class PatternsController < ApplicationController
   get '/patterns/:id' do
     if logged_in?
       @pattern = Pattern.find_by_id(params[:id])
+      @user = User.find_by(params[:id])
       erb :'patterns/show'
     else
       redirect :'/login'
