@@ -10,7 +10,6 @@ class UsersController < ApplicationController
 
   get '/login' do
     if logged_in?
-      @user = current_user.pieces.build(name: params[:name], size: params[:size])
       redirect :'/pieces'
     else
       erb :'users/login'
@@ -39,8 +38,8 @@ class UsersController < ApplicationController
       @user = User.create(email: params[:email], username: params[:username], password: params[:password])
       session[:user_id] = @user.id
       @user.save
-      # redirect :'/pieces'
-      redirect :"users/#{@user.id}"
+      redirect :'/pieces'
+      # redirect :"users/#{@user.id}"
     end
   end
 
@@ -49,8 +48,8 @@ class UsersController < ApplicationController
 
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      # redirect :'/pieces'
-      redirect :"users/#{@user.id}"
+      redirect :'/pieces'
+      # redirect :"users/#{@user.id}"
     else
       flash[:message] = "Something looks wrong with your info. Please try again, or signup to create an account."
       redirect :'/login'

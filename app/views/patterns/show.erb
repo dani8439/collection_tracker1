@@ -1,8 +1,8 @@
 <h2>Pattern Name: <%= @pattern.name %><h2>
 
 <h3>Pieces:<h3>
-  <% piece.patterns.each{|pattern| pattern.name == piece.pattern} %>
-    <p><a href="/pieces/<%= piece.id %>"><%= piece.size %> <% piece.name %></a></p>
+  <% @pattern.pieces.each do |piece| %>
+    <p><a href="/pieces/<%= piece.id %>"><%= piece.size %> <%= piece.name %></a></p>
   <% end %>
 
 

@@ -1,5 +1,5 @@
 user1 = User.create(:username => "BaublesBaloo", :email => "Baubles@hotmail.com", :password => "Woof!"),
-user2 = User.create(:username => "FalafelMonster", :email => "Challabackyoungin@aol.com", :password => "harruu")
+# user2 = User.create(:username => "FalafelMonster", :email => "Challabackyoungin@aol.com", :password => "harruu")
 
 piece1 = Piece.create(name: "Jug", size: "1/4 Pint"),
 piece2 = Piece.create(name: "Bowl", size: "French"),

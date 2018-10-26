@@ -55,7 +55,7 @@ class PiecesController < ApplicationController
       else
         @piece.pattern_ids = params[:patterns]
         @piece.user_id = current_user.id
-      #   @pattern.quantity = params[:pattern][:quantity]
+        # @pattern.quantity = params[:pattern][:quantity]
       end
       @piece.save
       flash[:message] = "Succesfully created piece."
