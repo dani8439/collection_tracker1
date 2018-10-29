@@ -50,10 +50,11 @@ class PiecesController < ApplicationController
       @piece = Piece.find_or_create_by(name: params[:name], size: params[:size])
       if !params[:pattern][:name].empty?
         @piece.pattern_ids = params[:patterns]
-        @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity], user_id: session[:user_id])
+        @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+        @piece.user_id = session[:user_id]
       else
         @piece.pattern_ids = params[:patterns]
-        @piece.user_id = current_user.id
+        @piece.user_id = session[:user_id]
       end
       @piece.save
       flash[:message] = "Succesfully created piece."
@@ -71,7 +72,7 @@ class PiecesController < ApplicationController
     @pattern = Pattern.find_by_id(params[:id])
     if !params[:pattern][:name].empty?
       @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-      @piece.user_id = current_user.id
+      @piece.user_id = session[:user_id]
       @piece.save
     elsif !params[:pattern][:quantity].empty?
       @pattern.quantity = params[:pattern][:quantity]
