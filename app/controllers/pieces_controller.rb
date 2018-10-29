@@ -50,8 +50,7 @@ class PiecesController < ApplicationController
       @piece = Piece.find_or_create_by(name: params[:name], size: params[:size])
       if !params[:pattern][:name].empty?
         @piece.pattern_ids = params[:patterns]
-        @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-        @piece.user_id = current_user.id
+        @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity], user_id: session[:user_id])
       else
         @piece.pattern_ids = params[:patterns]
         @piece.user_id = current_user.id

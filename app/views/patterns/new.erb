@@ -7,16 +7,13 @@
   <h2>Available Pieces</h2>
   <% @pieces = current_user.pieces %>
   <% @pieces.uniq.each do |piece| %>
-    <input type="checkbox" name="piece[name]" id="<%= piece.id %>" value="<%= piece.id%>"><%= piece.size %> <%= piece.name%></input><br>
+    <input type="checkbox" name="pieces[]" id="<%= piece.id %>" value="<%= piece.id%>"><%= piece.size %> <%= piece.name%></input><br>
   <% end %>
   <br></br>
   <h2>Create new Piece:</h2>
-  <label for="new_piece">Name: </label>
-  <input type="text" name="piece[name]" id="new_piece">
-  <label for="new_size">Size: </label>
-  <input type="text" name="piece[size]" id="new_size">
+  <label for="new_piece_name">Name: <input type="text" name="piece[name]" id="new_piece_name"></label>
+  <label for="new_piece_size">Size: <input type="text" name="piece[size]" id="new_piece_size"></label>
   <br></br>
-
 
   <input type="submit" value="Create Pattern">
 </form>
