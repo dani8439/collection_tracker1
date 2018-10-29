@@ -47,15 +47,14 @@ class PiecesController < ApplicationController
       flash[:message] = "Please do not leave any fields blank."
       redirect :'/pieces/new'
     else
-      @piece = current_user.pieces.build(name: params[:name], size: params[:size])
+      @piece = Piece.find_or_create_by(name: params[:name], size: params[:size])
       if !params[:pattern][:name].empty?
         @piece.pattern_ids = params[:patterns]
-        @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity], user_id: session[:user_id])
-        # @piece.user_id = current_user.id
+        @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+        @piece.user_id = current_user.id
       else
         @piece.pattern_ids = params[:patterns]
         @piece.user_id = current_user.id
-        # @pattern.quantity = params[:pattern][:quantity]
       end
       @piece.save
       flash[:message] = "Succesfully created piece."
@@ -69,14 +68,13 @@ class PiecesController < ApplicationController
     @user = User.find_by(params[:user_id])
     @piece = Piece.find_by_id(params[:id])
     @piece.update(name: params[:name], size: params[:size])
+    @piece.pattern_ids = params[:patterns]
     @pattern = Pattern.find_by_id(params[:id])
     if !params[:pattern][:name].empty?
-      @piece.pattern_ids = params[:patterns]
       @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
       @piece.user_id = current_user.id
       @piece.save
     elsif !params[:pattern][:quantity].empty?
-      @piece.pattern_ids = params[:patterns]
       @pattern.quantity = params[:pattern][:quantity]
       @pattern.save
       @piece.save
