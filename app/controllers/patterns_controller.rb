@@ -4,7 +4,8 @@ class PatternsController < ApplicationController
 
   get '/patterns' do
     @user = User.find_by(params[:id])
-    @pattern = @user.patterns
+    # @pattern = @user.patterns
+    @pattern = Pattern.all
     if logged_in?
       erb :'/patterns/index'
     else

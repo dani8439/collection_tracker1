@@ -12,7 +12,9 @@
   <% end %>
 
   <br></br>
-  
+  <label for="new_piece">Add Piece: <input type="text" name="piece[name]" id="new_piece"></label>
+  <label for="new_size">Add Size: <input type="text" name="piece[size]" id="new_size"></label>
+  <br><br>
 
 
   <input type="submit" value="Update Pattern">
@@ -24,3 +26,7 @@
 <%= flash[:message] %>
 <% end %>
 <br></br>
+
+<a href="/patterns">See Your Patterns</a><br>
+<a href="/pieces">Home</a><br>
+<a href="/logout">Log Out</a>
