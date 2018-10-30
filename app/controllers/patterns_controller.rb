@@ -70,9 +70,18 @@ class PatternsController < ApplicationController
   end
 
   patch '/patterns/:id' do
+    # binding.pry
     if logged_in?
       @pattern = Pattern.find_by_id(params[:id])
       @pattern.update(name: params[:name], quantity: params[:quantity])
+      @pattern.piece_ids = params[:pieces]
+      @piece = Piece.find_by_id(params[:id])
+      if !params[:piece][:name].empty? && !params[:piece][:size].empty?
+        @pattern.pieces << Piece.find_or_create_by(name: params[:piece][:name], size: params[:piece][:size])
+        @pattern.user_id = session[:user_id]
+        @pattern.save
+        @piece.save
+      end
       redirect :"patterns/#{@pattern.id}"
     else
       redirect :'/login'

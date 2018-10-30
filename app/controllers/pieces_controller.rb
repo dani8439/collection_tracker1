@@ -68,21 +68,25 @@ class PiecesController < ApplicationController
 
   patch '/pieces/:id' do
     # binding.pry
-    @user = User.find_by(params[:user_id])
-    @piece = Piece.find_by_id(params[:id])
-    @piece.update(name: params[:name], size: params[:size])
-    @piece.pattern_ids = params[:patterns]
-    @pattern = Pattern.find_by_id(params[:id])
-    if !params[:pattern][:name].empty?
-      @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-      @piece.user_id = session[:user_id]
-      @piece.save
-    elsif !params[:pattern][:quantity].empty?
-      @pattern.quantity = params[:pattern][:quantity]
-      @pattern.save
-      @piece.save
+    if logged_in?
+      @user = User.find_by(params[:user_id])
+      @piece = Piece.find_by_id(params[:id])
+      @piece.update(name: params[:name], size: params[:size])
+      @piece.pattern_ids = params[:patterns]
+      @pattern = Pattern.find_by_id(params[:id])
+      if !params[:pattern][:name].empty?
+        @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+        @piece.user_id = session[:user_id]
+        @piece.save
+      elsif !params[:pattern][:quantity].empty?
+        # @pattern.quantity = params[:pattern][:quantity] -- throwing an error?
+        @pattern.save
+        @piece.save
+      end
+      redirect :"/pieces/#{@piece.id}"
+    else
+      redirect :'/login'
     end
-    redirect :"/pieces/#{@piece.id}"
   end
 
 
