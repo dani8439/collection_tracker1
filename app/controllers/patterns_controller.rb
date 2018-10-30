@@ -48,20 +48,13 @@ class PatternsController < ApplicationController
         flash[:message] = "You need to fill in all fields to create a Pattern."
         redirect :'/patterns/new'
       else
-        @pattern = current_user.patterns.build(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+        @pattern = Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
         @user = User.find_by(params[:id])
         if !params[:piece][:name].empty?
           @pattern.piece_ids = params[:pieces]
-          @pattern.pieces <<  Piece.find_or_create_by(name: params[:piece][:name], size: params[:piece][:size], user_id: session[:user_id])
-          @piece.save
-          # @pattern.piece_ids = params[:pieces]
-          # @piece = Piece.find_or_create_by(name: params[:piece][:name], size: params[:piece][:size])
-          # @pattern.pieces << @piece
-          # @user.pieces << @piece
-          # @pattern.user_id = session[:user_id]
-          # @piece.user_id = session[:user_id]
-          # @pattern.save
-          # @piece.save
+          @pattern.pieces << Piece.find_or_create_by(name: params[:piece][:name], size: params[:piece][:size])
+          @pattern.user_id = session[:id]
+          @pattern.save
         else
           @pattern.piece_ids = params[:pieces]
           @pattern.user_id = session[:user_id]
@@ -76,10 +69,13 @@ class PatternsController < ApplicationController
   end
 
   patch '/patterns/:id' do
-    @pattern = Pattern.find_by_id(params[:id])
-    @pattern.update(name: params[:name], quantity: params[:quantity])
-
-    redirect :"patterns/#{@pattern.id}"
+    if logged_in?
+      @pattern = Pattern.find_by_id(params[:id])
+      @pattern.update(name: params[:name], quantity: params[:quantity])
+      redirect :"patterns/#{@pattern.id}"
+    else
+      redirect :'/login'
+    end
   end
 
 
