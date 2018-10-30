@@ -48,11 +48,16 @@ class PatternsController < ApplicationController
       redirect :'/patterns/new'
     else
       @pattern = Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+      @user = User.find_by(params[:id])
       if !params[:piece][:name].empty?
         @pattern.piece_ids = params[:pieces]
-        @pattern.pieces << Piece.find_or_create_by(name: params[:piece][:name], size: params[:piece][:size], user_id: session[:user_id])
-        # @pattern.user_id = current_user.id -- Causing the error. Define it here, or as part of Piece.creation? Throws error in pattern cannot be persisted to database.
+        @piece = Piece.find_or_create_by(name: params[:piece][:name], size: params[:piece][:size])
+        @pattern.pieces << @piece
+        @user.pieces << @piece
+        @pattern.user_id = session[:user_id]
+        @piece.user_id = session[:user_id]
         @pattern.save
+        @piece.save
       else
         @pattern.piece_ids = params[:pieces]
         @pattern.user_id = session[:user_id]

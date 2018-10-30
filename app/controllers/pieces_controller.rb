@@ -50,7 +50,8 @@ class PiecesController < ApplicationController
       @piece = Piece.find_or_create_by(name: params[:name], size: params[:size])
       if !params[:pattern][:name].empty?
         @piece.pattern_ids = params[:patterns]
-        @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity], user_id: session[:user_id])
+        @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+        @piece.user_id = session[:user_id]
         # @piece.user_id = session[:user_id] OR current_user.id -- Causing issues when signing in, cannot see users pieces. Why if user_id is set?
       else
         @piece.pattern_ids = params[:patterns]
