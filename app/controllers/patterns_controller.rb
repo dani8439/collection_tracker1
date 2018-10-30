@@ -51,7 +51,7 @@ class PatternsController < ApplicationController
       if !params[:piece][:name].empty?
         @pattern.piece_ids = params[:pieces]
         @pattern.pieces << Piece.find_or_create_by(name: params[:piece][:name], size: params[:piece][:size], user_id: session[:user_id])
-        # @pattern.user_id = current_user.id
+        # @pattern.user_id = current_user.id -- Causing the error. Define it here, or as part of Piece.creation? Throws error in pattern cannot be persisted to database.
         @pattern.save
       else
         @pattern.piece_ids = params[:pieces]
