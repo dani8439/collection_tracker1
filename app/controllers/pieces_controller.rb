@@ -42,27 +42,29 @@ class PiecesController < ApplicationController
   end
 
   post '/pieces' do
-    # binding.pry
-    if params[:name] == "" || params[:size] == ""
-      flash[:message] = "Please do not leave any fields blank."
-      redirect :'/pieces/new'
-    else
-      @piece = Piece.find_or_create_by(name: params[:name], size: params[:size])
-      if !params[:pattern][:name].empty?
-        @piece.pattern_ids = params[:patterns]
-        @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-        @piece.user_id = session[:user_id]
-        # @piece.user_id = session[:user_id] OR current_user.id -- Causing issues when signing in, cannot see users pieces. Why if user_id is set?
+    if logged_in?
+      if params[:name] == "" || params[:size] == ""
+        flash[:message] = "Please do not leave any fields blank."
+        redirect :"/pieces/new"
       else
-        @piece.pattern_ids = params[:patterns]
-        @piece.user_id = session[:user_id]
+        @piece = Piece.find_or_create_by(name: params[:name], size: params[:size])
+        if !params[:pattern][:name].empty?
+          @piece.pattern_ids = params[:patterns]
+          @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+          # @piece.user_id = session[:user_id] OR current_user.id -- Causing issues when signing in, cannot see users pieces. Why if user_id is set?
+          @piece.user_id = session[:user_id]
+        else
+          @piece.pattern_ids = params[:patterns]
+          @piece.user_id = session[:user_id]
+        end
+        @piece.save
+        flash[:message] = "Successfully created piece."
+        redirect :"/pieces/#{@piece.id}"
       end
-      @piece.save
-      flash[:message] = "Succesfully created piece."
-      redirect :"/pieces/#{@piece.id}"
+    else
+      redirect :'/login'
     end
   end
-
 
   patch '/pieces/:id' do
     # binding.pry

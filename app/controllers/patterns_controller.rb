@@ -43,28 +43,35 @@ class PatternsController < ApplicationController
 
   post '/patterns' do
     # binding.pry
-    if params[:pattern][:name] == "" || params[:pattern][:quantity] == ""
-      flash[:message] = "You need to fill in all fields to create a Pattern."
-      redirect :'/patterns/new'
-    else
-      @pattern = Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-      @user = User.find_by(params[:id])
-      if !params[:piece][:name].empty?
-        @pattern.piece_ids = params[:pieces]
-        @piece = Piece.find_or_create_by(name: params[:piece][:name], size: params[:piece][:size])
-        @pattern.pieces << @piece
-        @user.pieces << @piece
-        @pattern.user_id = session[:user_id]
-        @piece.user_id = session[:user_id]
-        @pattern.save
-        @piece.save
+    if logged_in?
+      if params[:pattern][:name] == "" || params[:pattern][:quantity] == ""
+        flash[:message] = "You need to fill in all fields to create a Pattern."
+        redirect :'/patterns/new'
       else
-        @pattern.piece_ids = params[:pieces]
-        @pattern.user_id = session[:user_id]
+        @pattern = Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+        @user = User.find_by(params[:id])
+        if !params[:piece][:name].empty?
+          @pattern.piece_ids = params[:pieces]
+          @pattern.pieces << Piece.find_or_create_by(name: params[:piece][:name], size: params[:piece][:size], user_id: session[:user_id])
+          @pattern.save
+          # @pattern.piece_ids = params[:pieces]
+          # @piece = Piece.find_or_create_by(name: params[:piece][:name], size: params[:piece][:size])
+          # @pattern.pieces << @piece
+          # @user.pieces << @piece
+          # @pattern.user_id = session[:user_id]
+          # @piece.user_id = session[:user_id]
+          # @pattern.save
+          # @piece.save
+        else
+          @pattern.piece_ids = params[:pieces]
+          @pattern.user_id = session[:user_id]
+        end
+        @pattern.save
+        flash[:message] = "Successfully created pattern."
+        redirect :"/patterns/#{@pattern.id}"
       end
-      @pattern.save
-      flash[:message] = "Successfully created pattern."
-      redirect :"/patterns/#{@pattern.id}"
+    else
+      redirect :'/login'
     end
   end
 
