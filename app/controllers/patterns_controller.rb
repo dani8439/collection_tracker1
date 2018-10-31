@@ -76,6 +76,7 @@ class PatternsController < ApplicationController
       @pattern.update(name: params[:name], quantity: params[:quantity])
       @pattern.piece_ids = params[:pieces]
       @piece = Piece.find_by_id(params[:id])
+      # Need to fix when pieces[] are checked, to update piece to users too.
       if !params[:piece][:name].empty? && !params[:piece][:size].empty?
         @pattern.pieces << Piece.find_or_create_by(name: params[:piece][:name], size: params[:piece][:size])
         @pattern.user_id = session[:user_id]

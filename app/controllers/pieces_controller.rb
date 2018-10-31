@@ -51,7 +51,6 @@ class PiecesController < ApplicationController
         if !params[:pattern][:name].empty?
           @piece.pattern_ids = params[:patterns]
           @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-          # @piece.user_id = session[:user_id] OR current_user.id -- Causing issues when signing in, cannot see users pieces. Why if user_id is set?
           @piece.user_id = session[:user_id]
         else
           @piece.pattern_ids = params[:patterns]
