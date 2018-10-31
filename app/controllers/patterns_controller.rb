@@ -49,13 +49,12 @@ class PatternsController < ApplicationController
         flash[:message] = "You need to fill in all fields to create a Pattern."
         redirect :'/patterns/new'
       else
-        # is it an error that pattern is not added when not chosen with any pieces?? But why create pattern without a piece? Makes no sense.
+        # Not an error that created patterns with no pieces, are not persisted to database. Cannot have patterns without pieces
         @pattern = Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-        # @user = User.find_by(params[:id])
-        if !params[:piece][:name].empty? && !params[:piece][:size]
+        @user = User.find_by(params[:id])
+        if !params[:piece][:name].empty? && !params[:piece][:size].empty?
           @pattern.piece_ids = params[:pieces]
-          @pattern.pieces << Piece.create(name: params[:piece][:name], size: params[:piece][:size])
-          @pattern.user_id = session[:id]
+          @pattern.pieces << Piece.create(name: params[:piece][:name], size: params[:piece][:size], user_id: session[:user_id])
           @pattern.save
         else
           @pattern.piece_ids = params[:pieces]
@@ -71,13 +70,12 @@ class PatternsController < ApplicationController
   end
 
   patch '/patterns/:id' do
-    # binding.pry
+    binding.pry
     if logged_in?
       @user = User.find_by(params[:user_id])
       @pattern = Pattern.find_by_id(params[:id])
-      @pattern.update(name: params[:name], quantity: params[:quantity])
+      @pattern.update(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
       @pattern.piece_ids = params[:pieces]
-      # Need to fix when pieces[] are checked, to update piece to users too.
       if !params[:piece][:name].empty? && !params[:piece][:size].empty?
         @pattern.pieces << Piece.create(name: params[:piece][:name], size: params[:piece][:size], user_id: session[:user_id])
         @pattern.user_id = session[:user_id]
