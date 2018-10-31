@@ -72,7 +72,7 @@ class PiecesController < ApplicationController
       @piece = Piece.find_by_id(params[:id])
       @piece.update(name: params[:name], size: params[:size])
       @piece.pattern_ids = params[:patterns]
-      @pattern = Pattern.find_by_id(params[:id])
+      @pattern = Pattern.find_by_id(params[:id]) #?
       if !params[:pattern][:name].empty?
         @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
         @piece.user_id = session[:user_id]
@@ -82,6 +82,7 @@ class PiecesController < ApplicationController
         @pattern.save
         @piece.save
       end
+      @piece.save
       redirect :"/pieces/#{@piece.id}"
     else
       redirect :'/login'

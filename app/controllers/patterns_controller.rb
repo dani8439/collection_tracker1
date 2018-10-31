@@ -51,8 +51,8 @@ class PatternsController < ApplicationController
       else
         # is it an error that pattern is not added when not chosen with any pieces?? But why create pattern without a piece? Makes no sense.
         @pattern = Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-        @user = User.find_by(params[:id])
-        if !params[:piece][:name].empty?
+        # @user = User.find_by(params[:id])
+        if !params[:piece][:name].empty? && !params[:piece][:size]
           @pattern.piece_ids = params[:pieces]
           @pattern.pieces << Piece.create(name: params[:piece][:name], size: params[:piece][:size])
           @pattern.user_id = session[:id]
@@ -77,15 +77,13 @@ class PatternsController < ApplicationController
       @pattern = Pattern.find_by_id(params[:id])
       @pattern.update(name: params[:name], quantity: params[:quantity])
       @pattern.piece_ids = params[:pieces]
-      @piece = Piece.find_by_id(params[:id])
       # Need to fix when pieces[] are checked, to update piece to users too.
       if !params[:piece][:name].empty? && !params[:piece][:size].empty?
-        @piece = Piece.create(name: params[:piece][:name], size: params[:piece][:size])
+        @pattern.pieces << Piece.create(name: params[:piece][:name], size: params[:piece][:size], user_id: session[:user_id])
         @pattern.user_id = session[:user_id]
-        @user.pieces << @piece
         @pattern.save
-        @piece.save
       end
+      @pattern.save
       flash[:message] = "Sucessfully updated pattern."
       redirect :"patterns/#{@pattern.id}"
     else
