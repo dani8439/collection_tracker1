@@ -70,7 +70,7 @@ class PatternsController < ApplicationController
   end
 
   patch '/patterns/:id' do
-    binding.pry
+    # binding.pry
     if logged_in?
       @user = User.find_by(params[:user_id])
       @pattern = Pattern.find_by_id(params[:id])
