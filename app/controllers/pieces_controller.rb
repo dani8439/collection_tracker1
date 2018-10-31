@@ -50,7 +50,7 @@ class PiecesController < ApplicationController
         @piece = current_user.pieces.build(name: params[:name], size: params[:size])
         if !params[:pattern][:name].empty?
           @piece.pattern_ids = params[:patterns]
-          @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+          @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
           @piece.user_id = session[:user_id]
         else
           @piece.pattern_ids = params[:patterns]
@@ -74,7 +74,7 @@ class PiecesController < ApplicationController
       @piece.pattern_ids = params[:patterns]
       @pattern = Pattern.find_by_id(params[:id])
       if !params[:pattern][:name].empty?
-        @piece.patterns << Pattern.find_or_create_by(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+        @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
         @piece.user_id = session[:user_id]
         @piece.save
       elsif !params[:pattern][:quantity].empty?

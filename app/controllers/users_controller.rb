@@ -49,7 +49,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect :'/pieces'
     else
-      flash[:message] = "Something looks wrong with your info. Please try again, or signup to create an account."
+      flash[:message] = "Something looks wrong with your info. Please check to see that you filled in all fields correctly, or signup to create an account."
       redirect :'/login'
     end
   end
