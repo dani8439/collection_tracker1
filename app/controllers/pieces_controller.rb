@@ -72,19 +72,29 @@ class PiecesController < ApplicationController
       @piece = Piece.find_by_id(params[:id])
       @piece.update(name: params[:name], size: params[:size])
       # @piece.pattern_ids = params[:patterns]
-      if !params[:patterns][][:quantity].empty?
-        @piece.pattern_ids = params[:patterns]
-        @piece.save
-        if !params[:pattern][:name].empty?
-          @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-          @piece.user_id = session[:user_id]
+      params[:patterns].each do |i|
+        if !params[:patterns][i][:quantity].empty?
+          @piece.pattern_ids = params[:patterns]
           @piece.save
         end
+      end
+      if !params[:pattern][:name].empty?
+        @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+        @piece.user_id = session[:user_id]
+        @piece.save
+      end
+      # if !params[:patterns][][:quantity].empty?
+      #   @piece.pattern_ids = params[:patterns]
+      #   @piece.save
+      #   if !params[:pattern][:name].empty?
+      #     @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+      #     @piece.user_id = session[:user_id]
+      #     @piece.save
+      #   end
       # elsif !params[:pattern][:quantity].empty?
       #   # params[:patterns][][:quantity] pulls out quantity - with 1, 2, 3, 4, going into empty brackets for each piece.
       #   # @pattern.quantity = params[:pattern][:quantity] -- throwing an error?
       #   @piece.save
-      end
       @piece.save
       redirect :"/pieces/#{@piece.id}"
     else
