@@ -9,7 +9,7 @@
   <% @patterns.uniq.each do |pattern| %>
     <label><%= pattern.name %></label>
     <input type="checkbox" name="patterns[]" value="<%= pattern.id %>" id="<%= pattern.name%>" <%='checked' if @piece.patterns.include?(pattern)%>>
-    <label for="new_pattern_quantity">Quantity: <input type="text" name="patterns[][quantity]" value='<%= pattern.quantity if pattern %>'></label><br></br>
+    <label for="new_pattern_quantity">Quantity: <input type="text" name="patterns[][quantity]" id="<%= pattern.quantity %>" value='<%= pattern.quantity if @piece.patterns.include?(pattern)%>'></label><br></br>
   <% end %>
 
   <br></br>
