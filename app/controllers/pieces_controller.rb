@@ -66,16 +66,18 @@ class PiecesController < ApplicationController
   end
 
   patch '/pieces/:id' do
-    binding.pry
+    # binding.pry
     if logged_in?
       @user = User.find_by(params[:user_id])
       @piece = Piece.find_by_id(params[:id])
       @piece.update(name: params[:name], size: params[:size])
       # @piece.pattern_ids = params[:patterns]
-      params[:patterns].each do |i|
-        if !params[:patterns][i][:quantity].empty?
-          @piece.pattern_ids = params[:patterns]
-          @piece.save
+      if params[:patterns]
+        params[:patterns].each do |i|
+          if !params[:patterns][i.to_i][:quantity].empty?
+            @piece.pattern_ids = params[:patterns]
+            @piece.save
+          end
         end
       end
       if !params[:pattern][:name].empty?
