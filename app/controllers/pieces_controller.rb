@@ -66,7 +66,7 @@ class PiecesController < ApplicationController
   end
 
   patch '/pieces/:id' do
-    # binding.pry
+    binding.pry
     if logged_in?
       @user = User.find_by(params[:user_id])
       @piece = Piece.find_by_id(params[:id])
@@ -77,6 +77,7 @@ class PiecesController < ApplicationController
         @piece.user_id = session[:user_id]
         @piece.save
       elsif !params[:pattern][:quantity].empty?
+        # params[:patterns][][:quantity] pulls out quantity - with 1, 2, 3, 4, going into empty brackets for each piece.
         # @pattern.quantity = params[:pattern][:quantity] -- throwing an error?
         @piece.save
       end
