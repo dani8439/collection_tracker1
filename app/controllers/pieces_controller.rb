@@ -72,9 +72,10 @@ class PiecesController < ApplicationController
       @piece = Piece.find_by_id(params[:id])
       @piece.update(name: params[:name], size: params[:size])
       # @piece.pattern_ids = params[:patterns]
-      if params[:patterns]
+      if !params[:patterns].empty?
         params[:patterns].each do |i|
-          if !params[:patterns][i.to_i][:quantity].empty?
+          if !params[:patterns][i.to_i+1][:quantity].empty?
+            @pattern = Pattern.update(name: params[:pattern][:name], params[:pattern][:quantity]) #?? Know it's wrong,
             @piece.pattern_ids = params[:patterns]
             @piece.save
           end
