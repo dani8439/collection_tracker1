@@ -65,52 +65,33 @@ class PiecesController < ApplicationController
     end
   end
 
-  patch '/pieces/:id' do
-    binding.pry
-    if logged_in?
-      @user = User.find_by(params[:user_id])
-      @piece = Piece.find_by_id(params[:id])
-      @piece.update(name: params[:name], size: params[:size])
-      if !params[:patterns].empty?
-        @piece.patterns.each do |i|
-          if !params[:patterns][i].to_i+1[:quantity].empty?
-            @pattern = Pattern.update(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-            @piece.pattern_ids = params[:patterns]
-            @piece.save
-          end
-        end
-        # params[:patterns].each do |i|
-        #   if !params[:patterns][:pattern_ids][:quantity].empty?
-        #     @pattern = Pattern.update(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-        #     @piece.pattern_ids = params[:patterns]
-        #     @piece.save
-        #   end
-        # end
-      end
-      if params[:pattern][:name].empty?
-        @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-        @piece.user_id = session[:user_id]
-        @piece.save
-      end
-      @piece.save
-      redirect :"/pieces/#{@piece.id}"
-    else
-      redirect :'/login'
-    end
-  end
-
-      # if !params[:patterns][][:quantity].empty?
-      #   @piece.pattern_ids = params[:patterns]
-      #   @piece.save
-      #   if !params[:pattern][:name].empty?
-      #     @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-      #     @piece.user_id = session[:user_id]
-      #     @piece.save
-      #   end
-      # elsif !params[:pattern][:quantity].empty?
-      #   # params[:patterns][][:quantity] pulls out quantity - with 1, 2, 3, 4, going into empty brackets for each piece.
-      #   # @pattern.quantity = params[:pattern][:quantity] -- throwing an error?
-      #   @piece.save
+  # patch '/pieces/:id' do
+  #   binding.pry
+  #   if logged_in?
+  #     @user = User.find_by(params[:user_id])
+  #     @piece = Piece.find_by_id(params[:id])
+  #     @piece.update(name: params[:name], size: params[:size])
+  #     # @piece.pattern_ids = params[:patterns] throws error now that added quantity back in.
+  #     if !params[:patterns].empty?
+  #       # params[:patterns][][:quantity] -- how to iterate through index without getting error of implicit conversion??
+  #       params[:patterns].each.with_index(1) do |params, i|
+  #       if !params[:patterns][i][:quantity].empty?
+  #         @pattern = Pattern.update(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+  #         @piece.pattern_ids = params[:patterns]
+  #         @piece.save
+  #       end
+  #     end
+  #     if !params[:pattern][:name].empty?
+  #       @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+  #       @piece.user_id = session[:user_id]
+  #       @piece.save
+  #     end
+  #     @piece.save
+  #     redirect :"/pieces/#{@piece.id}"
+  #   else
+  #     redirect :'/login'
+  #   end
+  # end
 
 
   delete '/pieces/:id/delete' do
