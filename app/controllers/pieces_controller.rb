@@ -66,26 +66,34 @@ class PiecesController < ApplicationController
   end
 
   patch '/pieces/:id' do
-    # binding.pry
+    binding.pry
     if logged_in?
       @user = User.find_by(params[:user_id])
       @piece = Piece.find_by_id(params[:id])
       @piece.update(name: params[:name], size: params[:size])
-      # @piece.pattern_ids = params[:patterns]
       if !params[:patterns].empty?
-        params[:patterns].each do |i|
-          if !params[:patterns][i.to_i+1][:quantity].empty?
-            @pattern = Pattern.update(name: params[:pattern][:name], params[:pattern][:quantity]) #?? Know it's wrong,
-            @piece.pattern_ids = params[:patterns]
-            @piece.save
-          end
-        end
+        @piece.pattern_ids = params[:patterns]
+        @piece.save
+        # params[:patterns].each do |i|
+        #   if !params[:patterns][:pattern_ids][:quantity].empty?
+        #     @pattern = Pattern.update(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+        #     @piece.pattern_ids = params[:patterns]
+        #     @piece.save
+        #   end
+        # end
       end
-      if !params[:pattern][:name].empty?
+      if params[:pattern][:name].empty?
         @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
         @piece.user_id = session[:user_id]
         @piece.save
       end
+      @piece.save
+      redirect :"/pieces/#{@piece.id}"
+    else
+      redirect :'/login'
+    end
+  end
+
       # if !params[:patterns][][:quantity].empty?
       #   @piece.pattern_ids = params[:patterns]
       #   @piece.save
@@ -98,12 +106,6 @@ class PiecesController < ApplicationController
       #   # params[:patterns][][:quantity] pulls out quantity - with 1, 2, 3, 4, going into empty brackets for each piece.
       #   # @pattern.quantity = params[:pattern][:quantity] -- throwing an error?
       #   @piece.save
-      @piece.save
-      redirect :"/pieces/#{@piece.id}"
-    else
-      redirect :'/login'
-    end
-  end
 
 
   delete '/pieces/:id/delete' do
