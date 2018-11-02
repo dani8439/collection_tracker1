@@ -65,6 +65,35 @@ class PiecesController < ApplicationController
     end
   end
 
+  patch '/pieces/:id' do
+    binding.pry
+    if logged_in?
+      @user = User.find_by(params[:user_id])
+      @piece = Piece.find_by_id(params[:id])
+      @piece.update(name: params[:name], size: params[:size])
+      if !params[:patterns].empty?
+        @piece.pattern_ids = params[:patterns]
+        @piece.save
+        # params[:patterns].each.with_index(1) do |params, index|
+        #   if !params[:patterns][index][:quantity].empty?
+        #     # @pattern = Pattern.update(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+        #     @piece.pattern_ids = params[:patterns]
+        #     @piece.save
+        #   end
+        # end
+      end
+      if !params[:pattern][:name].empty?
+        @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+        @piece.user_id = session[:user_id]
+        @piece.save
+      end
+      @piece.save
+      redirect :"/pieces/#{@piece.id}"
+    else
+      redirect :'/login'
+    end
+  end
+
   # patch '/pieces/:id' do
   #   binding.pry
   #   if logged_in?
