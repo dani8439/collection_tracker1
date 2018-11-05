@@ -71,16 +71,11 @@ class PiecesController < ApplicationController
       @user = User.find_by(params[:user_id])
       @piece = Piece.find_by_id(params[:id])
       @piece.update(name: params[:name], size: params[:size])
-      if !params[:patterns].empty?
-        @piece.pattern_ids = params[:patterns]
-        @piece.save
-        # params[:patterns].each.with_index(1) do |params, index|
-        #   if !params[:patterns][index][:quantity].empty?
-        #     # @pattern = Pattern.update(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-        #     @piece.pattern_ids = params[:patterns]
-        #     @piece.save
-        #   end
-        # end
+      params[:patterns].each do |k, v|
+        if !v.empty?
+          @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+          @piece.save
+        end
       end
       if !params[:pattern][:name].empty?
         @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
@@ -93,6 +88,43 @@ class PiecesController < ApplicationController
       redirect :'/login'
     end
   end
+
+
+      # if !params[:patterns].empty?
+      #   @piece.pattern_ids = params[:patterns]
+      #   @piece.save
+
+ #        {"_method"=>"PATCH",
+ # "name"=>"Cup & Saucer",
+ # "size"=>"Small",
+ # "patterns"=>
+ #  ["11",
+ #   {"quantity"=>"1"},
+ #   "12",
+ #   {"quantity"=>"1"},
+ #   "13",
+ #   {"quantity"=>"1"},
+ #   {"quantity"=>""},
+ #   "21",
+ #   {"quantity"=>"1"},
+ #   "22",
+ #   {"quantity"=>"1"},
+ #   {"quantity"=>""},
+ #   "24",
+ #   {"quantity"=>"1"}],
+ # "pattern"=>{"name"=>"", "quantity"=>""},
+ # "id"=>"28"}
+
+
+        # params[:patterns].each.with_index(1) do |params, index|
+        #   if !params[:patterns][index][:quantity].empty?
+        #     # @pattern = Pattern.update(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+        #     @piece.pattern_ids = params[:patterns]
+        #     @piece.save
+        #   end
+        # end
+      # end
+
 
   # patch '/pieces/:id' do
   #   binding.pry
