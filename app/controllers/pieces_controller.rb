@@ -71,11 +71,18 @@ class PiecesController < ApplicationController
       @user = User.find_by(params[:user_id])
       @piece = Piece.find_by_id(params[:id])
       @piece.update(name: params[:name], size: params[:size])
+      # an array of hashes
       params[:patterns].each do |k, v|
-        if !v.empty?
-          @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-          @piece.save
-        end
+        # if !v.empty? # returns nil class
+        #   @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+        #   @piece.save
+        # end
+
+        #.each_value doesn't work, doesn't recognize because it's an array.
+
+        # if v.is_a? String
+        #   puts "#{k} => #{v}."
+        # end
       end
       if !params[:pattern][:name].empty?
         @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
@@ -90,30 +97,8 @@ class PiecesController < ApplicationController
   end
 
 
-      # if !params[:patterns].empty?
-      #   @piece.pattern_ids = params[:patterns]
-      #   @piece.save
+# {:name => "Cup & Saucer", :size => "Small", :patterns => [pattern_id, {:quantity => "1"}, pattern_id, {:quantity => "1"}, pattern_id, {:quantity => "2"}, pattern_id, {:quantity => ""}]}
 
- #        {"_method"=>"PATCH",
- # "name"=>"Cup & Saucer",
- # "size"=>"Small",
- # "patterns"=>
- #  ["11",
- #   {"quantity"=>"1"},
- #   "12",
- #   {"quantity"=>"1"},
- #   "13",
- #   {"quantity"=>"1"},
- #   {"quantity"=>""},
- #   "21",
- #   {"quantity"=>"1"},
- #   "22",
- #   {"quantity"=>"1"},
- #   {"quantity"=>""},
- #   "24",
- #   {"quantity"=>"1"}],
- # "pattern"=>{"name"=>"", "quantity"=>""},
- # "id"=>"28"}
 
 
         # params[:patterns].each.with_index(1) do |params, index|
