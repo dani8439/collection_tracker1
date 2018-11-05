@@ -71,22 +71,36 @@ class PiecesController < ApplicationController
       @user = User.find_by(params[:user_id])
       @piece = Piece.find_by_id(params[:id])
       @piece.update(name: params[:name], size: params[:size])
-      # @piece.pattern_ids = params[:patterns]
+      @piece.pattern_ids = params[:patterns]
+      # Throws TypeError when params[:patterns][1][:new_quantity] -- no implicit conversion of Symbol to integer, because info is pattern_id, others are hashes.
+      # params[:patterns].each do |pattern|
+      #   if pattern.is_a? Hash
+      #     pattern.select do |key, value|
+      #       if value != ""
+      #         pattern.update -- How?? won't work. 
+      #
+      #
+      #     @piece.save
+      #   end
+      # end
       if !params[:pattern][:name].empty?
         @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
         @piece.user_id = session[:user_id]
         @piece.save
       end
-      # params[:patterns].each do |pattern|
-      # .deep_stringify_key ??
-      # http://billpatrianakos.me/blog/2013/09/29/rails-tricky-error-no-implicit-conversion-from-symbol-to-integer/
-      # http://patshaughnessy.net/2014/6/16/a-rule-of-thumb-for-strong-parameters
       @piece.save
       redirect :"/pieces/#{@piece.id}"
     else
       redirect :'/login'
     end
   end
+
+      # params[:patterns].each do |pattern|
+      # .deep_stringify_key ??
+      # http://billpatrianakos.me/blog/2013/09/29/rails-tricky-error-no-implicit-conversion-from-symbol-to-integer/
+      # http://patshaughnessy.net/2014/6/16/a-rule-of-thumb-for-strong-parameters
+
+
       # an array of hashes
       # params[:patterns].each do |k, v|
         # if !v.empty? # returns nil class
