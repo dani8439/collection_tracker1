@@ -66,17 +66,21 @@ class PiecesController < ApplicationController
   end
 
   patch '/pieces/:id' do
-    # binding.pry
+    binding.pry
     if logged_in?
       @user = User.find_by(params[:user_id])
       @piece = Piece.find_by_id(params[:id])
       @piece.update(name: params[:name], size: params[:size])
-      @piece.pattern_ids = params[:patterns]
+      # @piece.pattern_ids = params[:patterns]
       if !params[:pattern][:name].empty?
         @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
         @piece.user_id = session[:user_id]
         @piece.save
       end
+      # params[:patterns].each do |pattern|
+      # .deep_stringify_key ??
+      # http://billpatrianakos.me/blog/2013/09/29/rails-tricky-error-no-implicit-conversion-from-symbol-to-integer/
+      # http://patshaughnessy.net/2014/6/16/a-rule-of-thumb-for-strong-parameters
       @piece.save
       redirect :"/pieces/#{@piece.id}"
     else
