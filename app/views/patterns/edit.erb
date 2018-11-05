@@ -8,7 +8,7 @@
   <% @pieces = current_user.pieces %>
   <% @pieces.uniq.each do |piece| %>
   <label><%= piece.size %> <%= piece.name %></label>
-  <input type="checkbox" name="pieces[]" value="<%= piece.id %>" id="<%= piece.id %>" <%='checked' if @pattern.pieces.include?(piece)%>>
+  <input type="checkbox" name="pieces[]" value="<%= piece.id %>" id="<%= piece.id %>" <%='checked' if @pattern.pieces.include?(piece)%>><br>
   <% end %>
 
   <br></br>

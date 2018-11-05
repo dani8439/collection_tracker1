@@ -66,24 +66,12 @@ class PiecesController < ApplicationController
   end
 
   patch '/pieces/:id' do
-    binding.pry
+    # binding.pry
     if logged_in?
       @user = User.find_by(params[:user_id])
       @piece = Piece.find_by_id(params[:id])
       @piece.update(name: params[:name], size: params[:size])
-      # an array of hashes
-      params[:patterns].each do |k, v|
-        # if !v.empty? # returns nil class
-        #   @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-        #   @piece.save
-        # end
-
-        #.each_value doesn't work, doesn't recognize because it's an array.
-
-        # if v.is_a? String
-        #   puts "#{k} => #{v}."
-        # end
-      end
+      @piece.pattern_ids = params[:patterns]
       if !params[:pattern][:name].empty?
         @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
         @piece.user_id = session[:user_id]
@@ -95,6 +83,20 @@ class PiecesController < ApplicationController
       redirect :'/login'
     end
   end
+      # an array of hashes
+      # params[:patterns].each do |k, v|
+        # if !v.empty? # returns nil class
+        #   @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+        #   @piece.save
+        # end
+
+        #.each_value doesn't work, doesn't recognize because it's an array.
+
+        # if v.is_a? String
+        #   puts "#{k} => #{v}."
+        # end
+      # end
+
 
 
 # {:name => "Cup & Saucer", :size => "Small", :patterns => [pattern_id, {:quantity => "1"}, pattern_id, {:quantity => "1"}, pattern_id, {:quantity => "2"}, pattern_id, {:quantity => ""}]}
