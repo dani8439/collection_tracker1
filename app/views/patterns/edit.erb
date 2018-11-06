@@ -3,7 +3,7 @@
 <form action="/patterns/<%= @pattern.id %>" method="POST">
   <input type="hidden" name="_method" value="PATCH">
   <label for="pattern_name">Edit Name: <input type="text" name="pattern[name]" value="<%= @pattern.name %>"></label>
-  <label for="pattern_quantity">Edit Quantity: <input type="text" name="pattern[quantity]" value="<%= @pattern.quantity %>"></label>
+  <!-- <label for="pattern_quantity">Edit Quantity: <input type="text" name="pattern[quantity]" value="<%= @pattern.quantity %>"></label> -->
   <br><br>
   <% @pieces = current_user.pieces %>
   <% @pieces.uniq.each do |piece| %>

@@ -2,7 +2,7 @@
 
 <form action="/patterns" method="POST">
   <label for="pattern_name">Pattern Name: <input type="text" name="pattern[name]" id="pattern_name"></label>
-  <label for="pattern_quantity">Quantity: <input type="text" name="pattern[quantity]" id="pattern_quantity"></label>
+  <!-- <label for="pattern_quantity">Quantity: <input type="text" name="pattern[quantity]" id="pattern_quantity"></label> -->
   <br></br>
   <h2>Available Pieces</h2>
   <% @pieces = current_user.pieces %>
@@ -25,4 +25,6 @@
 <% end %>
 
 <br></br>
+<a href="/patterns">See Your Patterns</a><br>
 <a href="/pieces">See Your Collection</a><br>
+<a href="/logout">Logout</a><br>

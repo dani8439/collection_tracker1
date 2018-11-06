@@ -45,29 +45,28 @@ class PatternsController < ApplicationController
   post '/patterns' do
     # binding.pry
     if logged_in?
-      if params[:pattern][:name] == "" || params[:pattern][:quantity] == ""
+      if params[:pattern][:name] == ""
         flash[:message] = "You need to fill in all fields to create a Pattern."
         redirect :'/patterns/new'
+      # else
+        # @pattern = Pattern.find_by(name: params[:pattern][:name])
+        # if @pattern
+        #   flash[:message] = "Pattern already exists"
+        #   redirect :"/patterns/new"
       else
-        # Not an error that created patterns with no pieces, are not persisted to database. Cannot have patterns without pieces
-        @pattern = Pattern.find_by(name: params[:pattern][:name])
-        if @pattern
-          flash[:message] = "Pattern already exists"
-          redirect :"/patterns/new"
-        else
-          @user = User.find_by(params[:id])
-          if !params[:piece][:name].empty? && !params[:piece][:size].empty?
-            @pattern.piece_ids = params[:pieces]
-            @pattern.pieces << Piece.create(name: params[:piece][:name], size: params[:piece][:size], user_id: session[:user_id])
-            @pattern.save
-          else
-            @pattern.piece_ids = params[:pieces]
-            @pattern.user_id = session[:user_id]
-          end
+        @pattern = Pattern.create(name: params[:pattern][:name])
+        @user = User.find_by(params[:id])
+        if !params[:piece][:name].empty? && !params[:piece][:size].empty?
+          @pattern.piece_ids = params[:pieces]
+          @pattern.pieces << Piece.create(name: params[:piece][:name], size: params[:piece][:size], user_id: session[:user_id])
           @pattern.save
-          flash[:message] = "Successfully created pattern."
-          redirect :"/patterns/#{@pattern.id}"
+        else
+          @pattern.piece_ids = params[:pieces]
+          @pattern.user_id = session[:user_id]
         end
+        @pattern.save
+        flash[:message] = "Successfully created pattern."
+        redirect :"/patterns/#{@pattern.id}"
       end
     else
       redirect :'/login'
@@ -79,7 +78,7 @@ class PatternsController < ApplicationController
     if logged_in?
       @user = User.find_by(params[:user_id])
       @pattern = Pattern.find_by_id(params[:id])
-      @pattern.update(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+      @pattern.update(name: params[:pattern][:name])
       @pattern.piece_ids = params[:pieces]
       if !params[:piece][:name].empty? && !params[:piece][:size].empty?
         @pattern.pieces << Piece.create(name: params[:piece][:name], size: params[:piece][:size], user_id: session[:user_id])
