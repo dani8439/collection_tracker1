@@ -4,8 +4,8 @@ class PiecesController < ApplicationController
 
   get '/pieces' do
     if logged_in?
-    @user = User.find_by_id(params[:id])
-    @piece = Piece.all
+      @user = User.find_by_id(params[:id])
+      @piece = Piece.all
       erb :'/pieces/index'
     else
       flash[:message] = "You must login."
@@ -66,7 +66,7 @@ class PiecesController < ApplicationController
   end
 
   patch '/pieces/:id' do
-    binding.pry
+    # binding.pry
     if logged_in?
       @user = User.find_by(params[:user_id])
       @piece = Piece.find_by_id(params[:id])

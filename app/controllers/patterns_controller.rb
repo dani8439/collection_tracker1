@@ -3,10 +3,9 @@ require 'pry'
 class PatternsController < ApplicationController
 
   get '/patterns' do
-    @user = User.find_by(params[:id])
-    # @pattern = @user.patterns
-    @pattern = Pattern.all
     if logged_in?
+      @user = User.find_by(params[:id])
+      @pattern = Pattern.all
       erb :'/patterns/index'
     else
       redirect :'/'
