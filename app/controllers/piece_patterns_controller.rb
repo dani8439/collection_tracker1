@@ -2,11 +2,16 @@ require 'pry'
 
 class PiecePatternsController < ApplicationController
 
-  # get '/piecepatterns' do
-  #   if logged_in?
-  #     @user = User.find_by_id(params[:id])
-  #   end
-  # end
+  get '/piecepatterns' do
+    if logged_in?
+      @user = User.find_by_id(params[:id])
+      @piecepattern = PiecePattern.all
+      erb :'/piecepatterns/index'
+    else
+      flash[:message] = "you must login."
+      redirect :'/'
+    end
+  end
 
   # get '/piecepatterns/new' do
   # end

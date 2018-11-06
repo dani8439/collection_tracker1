@@ -1,7 +1,3 @@
-<% if flash.has?(:message) %>
-  <%= flash[:message] %>
-<% end %>
-
 <h1>Welcome <%= @user.username %></h1>
 
 <h2>Here is your collection: </h2>
@@ -17,7 +13,14 @@
 </ul>
 <% end %>
 
+<br></br>
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
 
 <br></br>
+
+<a href="/piecepatterns">All Your Pieces </a><br>
 <a href="/pieces/new">Add a new piece </a><br>
+<a href="/patterns/new">Add a new pattern </a><br>
 <a href="/logout">Log Out </a><br>
