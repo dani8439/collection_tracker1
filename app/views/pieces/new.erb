@@ -7,7 +7,7 @@
   <label>Patterns: </label>
   <br></br>
   <% @patterns = current_user.patterns %>
-  <% @patterns.uniq.each do |pattern| %>
+  <% @patterns.each do |pattern| %>
     <input type="checkbox" name="patterns[]" value="<%= pattern.id %>" id="<%= pattern.name %>"><%= pattern.name %></input>
   <% end %>
   <br></br>

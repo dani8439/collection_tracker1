@@ -50,19 +50,24 @@ class PatternsController < ApplicationController
         redirect :'/patterns/new'
       else
         # Not an error that created patterns with no pieces, are not persisted to database. Cannot have patterns without pieces
-        @pattern = Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-        @user = User.find_by(params[:id])
-        if !params[:piece][:name].empty? && !params[:piece][:size].empty?
-          @pattern.piece_ids = params[:pieces]
-          @pattern.pieces << Piece.create(name: params[:piece][:name], size: params[:piece][:size], user_id: session[:user_id])
-          @pattern.save
+        @pattern = Pattern.find_by(name: params[:pattern][:name])
+        if @pattern
+          flash[:message] = "Pattern already exists"
+          redirect :"/patterns/new"
         else
-          @pattern.piece_ids = params[:pieces]
-          @pattern.user_id = session[:user_id]
+          @user = User.find_by(params[:id])
+          if !params[:piece][:name].empty? && !params[:piece][:size].empty?
+            @pattern.piece_ids = params[:pieces]
+            @pattern.pieces << Piece.create(name: params[:piece][:name], size: params[:piece][:size], user_id: session[:user_id])
+            @pattern.save
+          else
+            @pattern.piece_ids = params[:pieces]
+            @pattern.user_id = session[:user_id]
+          end
+          @pattern.save
+          flash[:message] = "Successfully created pattern."
+          redirect :"/patterns/#{@pattern.id}"
         end
-        @pattern.save
-        flash[:message] = "Successfully created pattern."
-        redirect :"/patterns/#{@pattern.id}"
       end
     else
       redirect :'/login'

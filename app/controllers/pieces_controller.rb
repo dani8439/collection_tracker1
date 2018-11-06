@@ -72,17 +72,6 @@ class PiecesController < ApplicationController
       @piece = Piece.find_by_id(params[:id])
       @piece.update(name: params[:name], size: params[:size])
       @piece.pattern_ids = params[:patterns]
-      # Throws TypeError when params[:patterns][1][:new_quantity] -- no implicit conversion of Symbol to integer, because info is pattern_id, others are hashes.
-      # params[:patterns].each do |pattern|
-      #   if pattern.is_a? Hash
-      #     pattern.select do |key, value|
-      #       if value != ""
-      #         pattern.update -- How?? won't work. 
-      #
-      #
-      #     @piece.save
-      #   end
-      # end
       if !params[:pattern][:name].empty?
         @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
         @piece.user_id = session[:user_id]
@@ -94,41 +83,6 @@ class PiecesController < ApplicationController
       redirect :'/login'
     end
   end
-
-      # params[:patterns].each do |pattern|
-      # .deep_stringify_key ??
-      # http://billpatrianakos.me/blog/2013/09/29/rails-tricky-error-no-implicit-conversion-from-symbol-to-integer/
-      # http://patshaughnessy.net/2014/6/16/a-rule-of-thumb-for-strong-parameters
-
-
-      # an array of hashes
-      # params[:patterns].each do |k, v|
-        # if !v.empty? # returns nil class
-        #   @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-        #   @piece.save
-        # end
-
-        #.each_value doesn't work, doesn't recognize because it's an array.
-
-        # if v.is_a? String
-        #   puts "#{k} => #{v}."
-        # end
-      # end
-
-
-
-# {:name => "Cup & Saucer", :size => "Small", :patterns => [pattern_id, {:quantity => "1"}, pattern_id, {:quantity => "1"}, pattern_id, {:quantity => "2"}, pattern_id, {:quantity => ""}]}
-
-
-
-        # params[:patterns].each.with_index(1) do |params, index|
-        #   if !params[:patterns][index][:quantity].empty?
-        #     # @pattern = Pattern.update(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-        #     @piece.pattern_ids = params[:patterns]
-        #     @piece.save
-        #   end
-        # end
-      # end
 
 
   # patch '/pieces/:id' do
