@@ -55,5 +55,14 @@ class PiecePatternsController < ApplicationController
   end
 
   delete '/piecepatterns/:id/delete' do
+    if logged_in?
+      @piecepattern = PiecePattern.find_by_id(params[:id])
+      if @piecepattern && @piecepattern.piece.user_id == session[:user_id]
+        @piecepattern.delete
+      end
+      redirect :'/piecepatterns'
+    else
+      redirect :'/login'
+    end
   end
 end
