@@ -55,7 +55,7 @@ class PiecesController < ApplicationController
         elsif
           !params[:piecepattern][:quantity].empty?
           @piecepattern.quantity = params[:piecepattern][:quantity]
-          @piecepattern.user_id = session[:user_id]
+          @piecepattern.piece.user_id = session[:user_id]
         else
           @piece.pattern_ids = params[:patterns]
           @piece.user_id = session[:user_id]
