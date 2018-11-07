@@ -13,8 +13,8 @@ class PiecePatternsController < ApplicationController
     end
   end
 
-  # get '/piecepatterns/new' do
-  # end
+  get '/piecepatterns/new' do
+  end
 
   get '/piecepatterns/:id' do
     if logged_in?
@@ -37,8 +37,10 @@ class PiecePatternsController < ApplicationController
     end
   end
 
-  # post '/piecepatterns' do
-  # end
+  post '/piecepatterns' do
+    # if logged_in?
+    #
+  end
 
 
   patch '/piecepatterns/:id' do

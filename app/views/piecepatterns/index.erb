@@ -1,0 +1,16 @@
+<h1>Hello <%= current_user.username%>!</h1>
+
+<h2>Here is Your Collection</h2>
+
+<% PiecePattern.all.each do |piecepattern|%>
+<ul>
+  <li><a href="/piecepatterns/<%= piecepattern.id%>"><%= piecepattern.quantity %> - <%= piecepattern.piece.size%> <%= piecepattern.piece.name %> in <%= piecepattern.pattern.name %> </li><br>
+</ul>
+<% end %>
+
+
+<br></br>
+<a href="/pieces/new">Add a New Piece</a><br>
+<a href="/patterns/new">Add a New Pattern</a><br>
+<a href="/patterns">See Your Patterns</a><br>
+<a href="/logout">Log Out </a><br>

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'Pattern' do
   before do
     @piece = Piece.create(:name => "Jug", :size => "1/4 Pint")
-    @pattern = Pattern.create(name: "Utility", quantity: "1")
+    @pattern = Pattern.create(name: "Utility")
 
     @piece.patterns << @pattern
     @piece.pattern_ids = @pattern.id
@@ -17,9 +17,6 @@ describe 'Pattern' do
     expect(@pattern.name).to eq("Utility")
   end
 
-  it "can have a quantity" do
-    expect(@pattern.quantity).to eq(1)
-  end
 
   it "can have many pieces" do
     expect(@pattern.pieces.count).to eq(1)

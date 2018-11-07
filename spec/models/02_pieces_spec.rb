@@ -4,7 +4,7 @@ describe 'Piece' do
   before do
     @piece = Piece.create(:name => "Jug", :size => "1/4 Pint")
     @user = User.create(:username => "BaublesBaloo", :email => "Baubles@hotmail.com", :password => "Woof!")
-    @pattern = Pattern.create(name: "Utility", :quantity => "1")
+    @pattern = Pattern.create(name: "Utility")
 
     @piece.patterns << @pattern
     @piece.pattern_ids = @pattern.id
