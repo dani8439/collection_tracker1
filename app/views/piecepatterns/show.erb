@@ -1,0 +1,25 @@
+<h2><%= @piecepattern.piece.size %></h2>
+<h2><%= @piecepattern.piece.name %></h2>
+<h2><%= @piecepattern.pattern.name %></h2>
+<h3>Quantity: <%= @piecepattern.quantity %></h3>
+
+
+<a href="/piecepatterns/<%= @piecepattern.id %>/edit">Edit Piece </a>
+<br></br>
+
+<form action="/piecepatterns/<%=@piecepattern.id%>/delete" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" id="submit" value="Delete Piece">
+</form>
+
+<br></br>
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+<br></br>
+
+<a href="/pieces/new">Add Another Piece</a><br>
+<a href="/patterns/new">Add a New Pattern</a><br>
+<a href="/patterns">See Your Patterns</a><br>
+<a href="/piecepatterns">See Your Collection</a><br>
+<a href="/logout">Logout</a><br>

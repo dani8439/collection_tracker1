@@ -2,4 +2,7 @@
 
 <form action="/piecepatterns/<%= @piecepattern.id %>" method="POST">
   <input type="hidden" name="_method" value="PATCH">
+  <label for="quantity">Edit Quantity: <input type="text" name="quantity" id="piecepattern_quantity" value="<%= @piecepattern.quantity %>">
+  <br></br>
+  <input type="submit" value="Update Piece">
 </form>

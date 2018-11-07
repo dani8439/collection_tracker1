@@ -52,6 +52,10 @@ class PiecesController < ApplicationController
           @piece.pattern_ids = params[:patterns]
           @piece.patterns << Pattern.create(name: params[:pattern][:name])
           @piece.user_id = session[:user_id]
+        elsif
+          !params[:piecepattern][:quantity].empty?
+          @piecepattern.quantity = params[:piecepattern][:quantity]
+          @piecepattern.user_id = session[:user_id]
         else
           @piece.pattern_ids = params[:patterns]
           @piece.user_id = session[:user_id]
