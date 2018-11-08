@@ -17,7 +17,7 @@ class PiecePatternsController < ApplicationController
     if logged_in?
       @user = User.find_by_id(params[:id])
       erb :'/piecepatterns/new'
-    else 
+    else
       redirect :'/login'
     end
   end
@@ -44,10 +44,20 @@ class PiecePatternsController < ApplicationController
   end
 
   post '/piecepatterns' do
+    binding.pry
     if logged_in?
-      if params[:quantity] == ""
-        flash[:message] = "Please fill in a quantity to create a piece."
+      if params[:piecepattern][:quantity] == "" || params[:piecepattern][:piece][:name] == "" || params[:piecepattern][:piece][:size] == ""
+        flash[:message] = "Please fill in all fields to create a piece."
         redirect :'/piecepatterns/new'
+      else
+        @piecepattern = PiecePattern.create(quantity: params[:piecepattern][:quantity])
+        @piecepattern.pattern = Pattern.find_or_create_by(name: params[:piecepattern][:pattern][:name])
+        @piecepattern.piece = Piece.create(name: params[:piecepattern][:piece][:name], size: params[:piecepattern][:piece][:size])
+        @piecepattern.piece.user_id = session[:user_id]
+        @piecepattern.save
+
+        flash[:message] = "Successfully create piece."
+        redirect :"/piecepatterns/#{@piecepattern.id}"
       end
     end
   end
