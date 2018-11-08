@@ -52,7 +52,7 @@ class PiecePatternsController < ApplicationController
       else
         @piecepattern = PiecePattern.create(quantity: params[:piecepattern][:quantity])
         @piecepattern.pattern = Pattern.find_or_create_by(name: params[:piecepattern][:pattern][:name])
-        @piecepattern.piece = Piece.create(name: params[:piecepattern][:piece][:name], size: params[:piecepattern][:piece][:size])
+        @piecepattern.piece = Piece.find_or_create_by(name: params[:piecepattern][:piece][:name], size: params[:piecepattern][:piece][:size])
         @piecepattern.piece.user_id = session[:user_id]
         @piecepattern.save
 

@@ -1,18 +1,26 @@
 <h1>Create a New Piece</h1>
 
 <form action="/piecepatterns" method="POST">
+  <h2>Piece</h2>
   <label for="piece_name">Piece Name: <input type="text" name="piecepattern[piece][name]" id="piece_name"></label>
   <label for="piece_size">Piece Size: <input type="text" name="piecepattern[piece][size]" id="piece_size"></label>
   <br></br>
-  <label>Patterns:</label>
+  <label>Available Pieces </label>
   <br></br>
-  <% @patterns = current_user.patterns %>
-  <% @patterns.uniq.each do |pattern| %>
-    <input type="checkbox" name="patterns[]" value="<%= pattern.id %>" id="<%= pattern.name %>"><%= pattern.name %></input><br>
+  <% @pieces = current_user.pieces %>
+  <% @pieces.each do |piece| %>
+    <input type="checkbox" name="pieces[]" id="<%= piece.id %>" value="<%= piece.id%>"><%= piece.size %> <%= piece.name%></input><br>
   <% end %>
   <br></br>
-  <h2>Add Pattern</h2>
+  <h2>Pattern</h2>
   <label for="new_pattern_name">Name: <input type="text" name="piecepattern[pattern][name]" id="new_pattern_name"></label>
+  <br></br>
+  <label>Available Patterns</label>
+  <br></br>
+  <% @patterns = current_user.patterns %>
+  <% @patterns.each do |pattern| %>
+    <input type="checkbox" name="patterns[]" value="<%= pattern.id %>" id="<%= pattern.name %>"><%= pattern.name %></input><br>
+  <% end %>
   <br></br>
   <h2>Add Quantity: </h2>
   <label for="new_piece_quantity">Quantity: <input type="text" name="piecepattern[quantity]" id="new_piece_quantity"></label>
@@ -27,7 +35,7 @@
 <% end %>
 
 <br></br>
-<a href="/piecepatterns">Your Collection</a><br>
-<a href="/patterns/new">Add a New Pattern</a><br>
+<a href="/piecepatterns">Your Pieces</a><br>
+<a href="/pieces">Your Collection Grouped By Pieces</a><br>
 <a href="/patterns">See Your Patterns</a><br>
 <a href="/logout">Log Out </a><br>

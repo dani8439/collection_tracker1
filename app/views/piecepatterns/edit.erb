@@ -2,7 +2,16 @@
 
 <form action="/piecepatterns/<%= @piecepattern.id %>" method="POST">
   <input type="hidden" name="_method" value="PATCH">
-  <label for="quantity">Edit Quantity: <input type="text" name="quantity" id="piecepattern_quantity" value="<%= @piecepattern.quantity %>">
-  <br></br>
+  <label for="quantity">Edit Quantity: <input type="text" name="quantity" id="piecepattern_quantity" value="<%= @piecepattern.quantity %>"></label><br></br>
+  <label for="piece_name">Edit Piece Name: <input type="text" name="piecepattern[piece][name]" id="piece_name"></label><br></br>
+  <label for="piece_size">Edit Piece Size: <input type="text" name="piecepattern[piece][size]" id="piece_size"></label><br></br>
+  <label for="pattern_name">Edit Pattern Name: <input type="text" name="piecepattern[pattern][name]" id="pattern_name"></label><br></br>
+
   <input type="submit" value="Update Piece">
 </form>
+
+<br><br>
+<a href="/piecepatterns">Your Pieces</a><br>
+<a href="/pieces">Your Collection Grouped By Pieces</a><br>
+<a href="/patterns">See Your Patterns</a><br>
+<a href="/logout">Log Out </a><br>
