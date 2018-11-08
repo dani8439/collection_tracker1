@@ -14,6 +14,12 @@ class PiecePatternsController < ApplicationController
   end
 
   get '/piecepatterns/new' do
+    if logged_in?
+      @user = User.find_by_id(params[:id])
+      erb :'/piecepatterns/new'
+    else 
+      redirect :'/login'
+    end
   end
 
   get '/piecepatterns/:id' do
@@ -38,8 +44,12 @@ class PiecePatternsController < ApplicationController
   end
 
   post '/piecepatterns' do
-    # if logged_in?
-    #
+    if logged_in?
+      if params[:quantity] == ""
+        flash[:message] = "Please fill in a quantity to create a piece."
+        redirect :'/piecepatterns/new'
+      end
+    end
   end
 
 
