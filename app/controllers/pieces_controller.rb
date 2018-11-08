@@ -42,6 +42,7 @@ class PiecesController < ApplicationController
   end
 
   post '/pieces' do
+    binding.pry
     if logged_in?
       if params[:name] == "" || params[:size] == ""
         flash[:message] = "Please do not leave any fields blank."
@@ -54,6 +55,7 @@ class PiecesController < ApplicationController
           @piece.patterns << Pattern.create(name: params[:pattern][:name])
           @piece.user_id = session[:user_id]
         elsif
+          # throwing an error here because of relationships.
           !params[:piecepattern][:quantity].empty?
           @piecepattern.quantity = PiecePattern.create(quantity: params[:piecepattern][:quantity])
           @piecepattern.piece.user_id = session[:user_id]
