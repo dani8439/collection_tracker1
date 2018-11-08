@@ -2,7 +2,8 @@
 
 <h2>Here is Your Collection</h2>
 
-<% PiecePattern.all.each do |piecepattern|%>
+<% @piecepatterns = current_user.piecepatterns %>
+<% @piecepatterns.each do |piecepattern| %>
 <ul>
   <li><a href="/piecepatterns/<%= piecepattern.id%>"><%= piecepattern.quantity %> - <%= piecepattern.piece.size%> <%= piecepattern.piece.name %> in <%= piecepattern.pattern.name %> </li><br>
 </ul>

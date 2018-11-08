@@ -5,7 +5,7 @@
 <% @pieces = current_user.pieces %>
 <% @pieces.each do |piece| %>
 <ul>
-  <li><a href="/pieces/<%= piece.id %>"><%= piece.size %> <%= piece.name %>-<%= %></li><br>
+  <li><a href="/pieces/<%= piece.id %>"><%= piece.size %> <%= piece.name %>-<%= @piecepattern %></li><br>
     <% piece.patterns.each do |pattern| %>
     <ul>
       <li><%= pattern.name %></li>

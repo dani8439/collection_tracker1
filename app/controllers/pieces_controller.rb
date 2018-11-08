@@ -48,13 +48,14 @@ class PiecesController < ApplicationController
         redirect :"/pieces/new"
       else
         @piece = current_user.pieces.build(name: params[:name], size: params[:size])
+        @piecepattern = PiecePattern.find_by_id(params[:id])
         if !params[:pattern][:name].empty?
           @piece.pattern_ids = params[:patterns]
           @piece.patterns << Pattern.create(name: params[:pattern][:name])
           @piece.user_id = session[:user_id]
         elsif
           !params[:piecepattern][:quantity].empty?
-          @piecepattern.quantity = params[:piecepattern][:quantity]
+          @piecepattern.quantity = PiecePattern.create(quantity: params[:piecepattern][:quantity])
           @piecepattern.piece.user_id = session[:user_id]
         else
           @piece.pattern_ids = params[:patterns]

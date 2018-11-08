@@ -4,7 +4,7 @@
 
 
 <% @patterns = current_user.patterns %>
-<% @patterns.each do |pattern| %>
+<% @patterns.uniq.each do |pattern| %>
 <ul>
   <li><a href="/patterns/<%= pattern.id %>"><%= pattern.name %> </li><br>
 </ul>
