@@ -47,7 +47,13 @@ class PiecesController < ApplicationController
       if params[:name] == "" || params[:size] == ""
         flash[:message] = "Please do not leave any fields blank."
         redirect :"/pieces/new"
-      else
+      elsif
+        @piece = Piece.find_by(name: params[:name], size: params[:size])
+        if current_user.pieces.include?(@piece)
+          flash[:message] = "Piece already exists."
+          redirect :'/pieces/new'
+        end
+      elsif
         @piece = current_user.pieces.build(name: params[:name], size: params[:size])
         @piecepattern = PiecePattern.find_by_id(params[:id])
         if !params[:pattern][:name].empty?

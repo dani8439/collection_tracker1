@@ -46,7 +46,7 @@ class PiecePatternsController < ApplicationController
   post '/piecepatterns' do
     # binding.pry
     if logged_in?
-      if params[:piecepattern][:quantity] == "" || params[:piecepattern][:piece][:name] == "" || params[:piecepattern][:piece][:size] == ""
+      if params[:piecepattern][:quantity] == "" || params[:piecepattern][:piece][:name] == "" || params[:piecepattern][:piece][:size] == "" || params[:piecepattern][:pattern][:name] == ""
         flash[:message] = "Please fill in all fields to create a piece."
         redirect :'/piecepatterns/new'
       else

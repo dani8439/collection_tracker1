@@ -6,7 +6,7 @@
   <label for="piece_size">Edit Size: <input type="text" name="size" id="piece_size" value="<%= @piece.size %>"></label>
   <br></br>
   <% @patterns = current_user.patterns %>
-  <% @patterns.uniq.each do |pattern| %>
+  <% @patterns.each do |pattern| %>
     <label><%= pattern.name %></label>
     <input type="checkbox" name="patterns[]" value="<%= pattern.id %>" id="<%= pattern.name%>" <%='checked' if @piece.patterns.include?(pattern)%>>
   <% end %>

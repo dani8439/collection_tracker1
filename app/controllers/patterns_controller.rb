@@ -50,7 +50,7 @@ class PatternsController < ApplicationController
       elsif
         @pattern = Pattern.find_by(name: params[:pattern][:name])
         if current_user.patterns.include?(@pattern)
-          flash[:message] = "Pattern already exists"
+          flash[:message] = "Pattern already exists."
           redirect :"/patterns/new"
         end
       elsif
