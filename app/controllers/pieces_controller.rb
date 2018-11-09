@@ -42,7 +42,7 @@ class PiecesController < ApplicationController
   end
 
   post '/pieces' do
-    binding.pry
+    # binding.pry
     if logged_in?
       if params[:name] == "" || params[:size] == ""
         flash[:message] = "Please do not leave any fields blank."
@@ -63,7 +63,8 @@ class PiecesController < ApplicationController
           @piece.save
           if !params[:piecepattern][:quantity].empty?
             @piecepattern = PiecePattern.create(quantity: params[:piecepattern][:quantity])
-            @piecepattern.piece.user_id = session[:user_id]
+            # @piecepattern.piece.user_id = session[:user_id]
+            @piecepattern.user_id = session[:user_id]
             @piecepattern.save
           else
             flash[:message] = "Please fill in a quantity."
