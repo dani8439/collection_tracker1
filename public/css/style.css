@@ -25,3 +25,13 @@ h4 {
 li {
   font-size: 18px;
 }
+
+
+.message {
+  font-size: 18px;
+  color: #9F6000;
+  background-color: #FEEFB3;
+  margin: 10px 0px;
+  padding: 12px;
+  vertical-align: middle;
+}

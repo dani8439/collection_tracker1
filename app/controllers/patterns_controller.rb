@@ -47,12 +47,13 @@ class PatternsController < ApplicationController
       if params[:pattern][:name] == ""
         flash[:message] = "You need to fill in all fields to create a Pattern."
         redirect :'/patterns/new'
-      # else
-        # @pattern = Pattern.find_by(name: params[:pattern][:name])
-        # if @pattern
-        #   flash[:message] = "Pattern already exists"
-        #   redirect :"/patterns/new"
-      else
+      elsif
+        @pattern = Pattern.find_by(name: params[:pattern][:name])
+        if current_user.patterns.include?(@pattern)
+          flash[:message] = "Pattern already exists"
+          redirect :"/patterns/new"
+        end
+      elsif
         @pattern = Pattern.create(name: params[:pattern][:name])
         @user = User.find_by(params[:id])
         if !params[:piece][:name].empty? && !params[:piece][:size].empty?
