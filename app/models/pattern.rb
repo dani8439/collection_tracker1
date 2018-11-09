@@ -3,5 +3,5 @@ class Pattern < ActiveRecord::Base
   has_many :piece_patterns
   has_many :pieces, through: :piece_patterns
 
-  # validates :name, uniqueness: true
+  validates :name, uniqueness: true { scope: :user_id }
 end
