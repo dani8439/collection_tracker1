@@ -42,7 +42,7 @@ class PiecesController < ApplicationController
   end
 
   post '/pieces' do
-    # binding.pry
+    binding.pry
     if logged_in?
       if params[:name] == "" || params[:size] == ""
         flash[:message] = "Please do not leave any fields blank."
@@ -55,16 +55,20 @@ class PiecesController < ApplicationController
         end
       elsif
         @piece = current_user.pieces.build(name: params[:name], size: params[:size])
-        @piecepattern = PiecePattern.find_by_id(params[:id])
+        # @piecepattern = PiecePattern.find_by_id(params[:id]) returns nil because not created yet.
         if !params[:pattern][:name].empty?
           @piece.pattern_ids = params[:patterns]
           @piece.patterns << Pattern.create(name: params[:pattern][:name])
           @piece.user_id = session[:user_id]
-        elsif
-          # throwing an error here because of relationships.
-          !params[:piecepattern][:quantity].empty?
-          @piecepattern.quantity = PiecePattern.create(quantity: params[:piecepattern][:quantity])
-          @piecepattern.piece.user_id = session[:user_id]
+          @piece.save
+          if !params[:piecepattern][:quantity].empty?
+            @piecepattern = PiecePattern.create(quantity: params[:piecepattern][:quantity])
+            @piecepattern.piece.user_id = session[:user_id]
+            @piecepattern.save
+          else
+            flash[:message] = "Please fill in a quantity."
+            redirect :'/pieces/new'
+          end
         else
           @piece.pattern_ids = params[:patterns]
           @piece.user_id = session[:user_id]
