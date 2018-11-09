@@ -55,8 +55,13 @@ class PiecesController < ApplicationController
         end
       elsif
         @piece = current_user.pieces.build(name: params[:name], size: params[:size])
+        @pattern = Pattern.find_by(name: params[:pattern][:name])
         # @piecepattern = PiecePattern.find_by_id(params[:id]) returns nil because not created yet.
         if !params[:pattern][:name].empty?
+          if current_user.patterns.include?(@pattern)
+            flash[:message] = "Pattern already exists."
+            redirect :'/pieces/new'
+          end       
           @piece.pattern_ids = params[:patterns]
           @piece.patterns << Pattern.create(name: params[:pattern][:name])
           @piece.user_id = session[:user_id]
