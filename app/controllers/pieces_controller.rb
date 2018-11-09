@@ -42,7 +42,7 @@ class PiecesController < ApplicationController
   end
 
   post '/pieces' do
-    binding.pry
+    # binding.pry
     if logged_in?
       if params[:name] == "" || params[:size] == ""
         flash[:message] = "Please do not leave any fields blank."
