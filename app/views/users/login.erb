@@ -8,10 +8,12 @@
 </form>
 
 <br></br>
+
 <% if flash.has?(:message) %>
-<%= flash[:message] %> <a href="/signup">Sign Up</a>
+  <div class="message"><%= flash[:message] %> <a href="/signup">Sign Up</a></div>
 <% end %>
-<br><br>
+
+<br></br>
 
 
 <a href="/">Home</a>
