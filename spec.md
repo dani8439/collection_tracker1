@@ -11,7 +11,7 @@ Specs:
 - [x] Ensure that users can't modify content created by other users - multiple times measures are put in place; checking that the information is the same user_id as session[:id], so that actions can be saved, updated, read, or destroyed. Both occur in the Controllers, and within the embedded ruby code to assure a user cannot see another person's content.
 - [x] Include user input validations - in users controller so that no username or email are alike, and in piece and pattern so that no fields are empty.
 - [x] BONUS - not required - Display validation failures to user with error message (example form URL e.g. /posts/new) - flash messages appear at bottom of screen to inform users when there are mistakes made.
-- [ ] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
+- [x] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
 
 Confirm
 - [x] You have a large number of small Git commits - more than one hundred.
