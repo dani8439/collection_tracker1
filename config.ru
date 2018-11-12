@@ -9,4 +9,5 @@ use Rack::MethodOverride
 use UsersController
 use PiecesController
 use PatternsController
+user WishlistsController
 run ApplicationController
