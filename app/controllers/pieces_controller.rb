@@ -50,7 +50,7 @@ class PiecesController < ApplicationController
         @piece = current_user.pieces.build(name: params[:name], size: params[:size])
         if !params[:pattern][:name].empty?
           @piece.pattern_ids = params[:patterns]
-          @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+          @piece.patterns << Pattern.create(name: params[:pattern][:name])
           @piece.user_id = session[:user_id]
         else
           @piece.pattern_ids = params[:patterns]
@@ -66,14 +66,14 @@ class PiecesController < ApplicationController
   end
 
   patch '/pieces/:id' do
-    binding.pry
+    # binding.pry
     if logged_in?
       @user = User.find_by(params[:user_id])
       @piece = Piece.find_by_id(params[:id])
       @piece.update(name: params[:name], size: params[:size])
       @piece.pattern_ids = params[:patterns]
       if !params[:pattern][:name].empty?
-        @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
+        @piece.patterns << Pattern.create(name: params[:pattern][:name])
         @piece.user_id = session[:user_id]
         @piece.save
       end
@@ -83,35 +83,6 @@ class PiecesController < ApplicationController
       redirect :'/login'
     end
   end
-
-
-  # patch '/pieces/:id' do
-  #   binding.pry
-  #   if logged_in?
-  #     @user = User.find_by(params[:user_id])
-  #     @piece = Piece.find_by_id(params[:id])
-  #     @piece.update(name: params[:name], size: params[:size])
-  #     # @piece.pattern_ids = params[:patterns] throws error now that added quantity back in.
-  #     if !params[:patterns].empty?
-  #       # params[:patterns][][:quantity] -- how to iterate through index without getting error of implicit conversion??
-  #       params[:patterns].each.with_index(1) do |params, i|
-  #       if !params[:patterns][i][:quantity].empty?
-  #         @pattern = Pattern.update(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-  #         @piece.pattern_ids = params[:patterns]
-  #         @piece.save
-  #       end
-  #     end
-  #     if !params[:pattern][:name].empty?
-  #       @piece.patterns << Pattern.create(name: params[:pattern][:name], quantity: params[:pattern][:quantity])
-  #       @piece.user_id = session[:user_id]
-  #       @piece.save
-  #     end
-  #     @piece.save
-  #     redirect :"/pieces/#{@piece.id}"
-  #   else
-  #     redirect :'/login'
-  #   end
-  # end
 
 
   delete '/pieces/:id/delete' do

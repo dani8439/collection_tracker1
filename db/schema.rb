@@ -11,11 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181017175230) do
+ActiveRecord::Schema.define(version: 20181112205822) do
 
   create_table "patterns", force: :cascade do |t|
     t.string  "name"
-    t.integer "quantity"
     t.integer "user_id"
   end
 
@@ -34,6 +33,14 @@ ActiveRecord::Schema.define(version: 20181017175230) do
     t.string "username"
     t.string "email"
     t.string "password_digest"
+  end
+
+  create_table "wishlist", force: :cascade do |t|
+    t.integer "user_id"
+    t.string  "pattern_name"
+    t.string  "piece_name"
+    t.string  "piece_size"
+    t.integer "quantity"
   end
 
 end

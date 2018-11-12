@@ -2,7 +2,7 @@
 
 <h3>Pieces:<h3>
   <%  @pattern.pieces.select{|piece| piece.user_id == current_user.id}.each do |piece| %>
-    <p><a href="/pieces/<%= piece.id %>"><%= @pattern.quantity %> - <%= piece.size %> <%= piece.name %></a></p>
+    <p><a href="/pieces/<%= piece.id %>"> <%= piece.size %> <%= piece.name %></a></p>
   <% end %>
 
 <br></br>

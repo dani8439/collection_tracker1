@@ -43,3 +43,5 @@ Collections = {
     }
   }  
 }
+
+Wishlist feature?
