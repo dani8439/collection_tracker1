@@ -42,6 +42,7 @@ class PiecesController < ApplicationController
   end
 
   post '/pieces' do
+    # binding.pry
     if logged_in?
       if params[:name] == "" || params[:size] == ""
         flash[:message] = "Please do not leave any fields blank."
@@ -97,6 +98,7 @@ class PiecesController < ApplicationController
       if @piece && @piece.user_id == session[:user_id]
         @piece.delete
       end
+      flash[:message] = "Piece has been deleted from your collection."
       redirect :'/pieces'
     else
       redirect :'/login'

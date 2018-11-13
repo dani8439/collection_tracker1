@@ -19,6 +19,7 @@ class UsersController < ApplicationController
   get '/logout' do
     if logged_in?
       session.destroy
+      flash[:message] = "Goodbye! See you next time."
       redirect :'/'
     else
       redirect :'/'

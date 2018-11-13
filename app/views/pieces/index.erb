@@ -5,7 +5,7 @@
 <% @pieces = current_user.pieces %>
 <% @pieces.each do |piece| %>
 <ul>
-  <li><a href="/pieces/<%= piece.id %>"><%= piece.size %> <%= piece.name %></li><br>
+  <li><a href="/pieces/<%= piece.id %>"><%= piece.patterns.count %> - <%= piece.size %> <%= piece.name %></li><br>
     <% piece.patterns.each do |pattern| %>
     <ul>
       <li><%= pattern.name %></li>
@@ -13,6 +13,12 @@
     <% end %>
 </ul>
 <% end %>
+
+<br></br>
+<% if flash.has?(:message) %>
+  <div class="message"><%= flash[:message] %> </div>
+<% end %>
+<br></br>
 
 <a href="/pieces/new">Add a New Piece</a><br>
 <a href="/patterns/new">Add a New Pattern</a><br>

@@ -97,6 +97,7 @@ class PatternsController < ApplicationController
       if @pattern && @pattern.user_id == session[:user_id]
         @pattern.delete
       end
+      flash[:message] = "Pattern has been deleted from your collection."
       redirect :'/pieces'
     else
       redirect :'/login'
