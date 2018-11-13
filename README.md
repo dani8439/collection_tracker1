@@ -1,7 +1,7 @@
 # collection_tracker1
 A Sinatra App to keep pottery collections organized:
 
-* Users can add to the database pieces that they own.
+* Users can add to the database pieces that they own, as well as the patterns that compromise their collections.
 
 * Collections can be grouped by pieces, and what patterns they own of each.
 
