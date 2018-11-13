@@ -8,7 +8,7 @@
   <br></br>
   <% @patterns = current_user.patterns %>
   <% @patterns.uniq.each do |pattern| %>
-    <input type="checkbox" name="patterns[]" value="<%= pattern.id %>" id="<%= pattern.name %>"><%= pattern.name %></input>
+    <input type="checkbox" name="patterns[]" value="<%= pattern.id %>" id="<%= pattern.name %>"><%= pattern.name %></input><br></br>
   <% end %>
   <br></br>
   <h2>Add Pattern</h2>
