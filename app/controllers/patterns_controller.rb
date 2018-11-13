@@ -43,7 +43,7 @@ class PatternsController < ApplicationController
   end
 
   post '/patterns' do
-    binding.pry
+    # binding.pry
     if logged_in?
       if params[:pattern][:name] == ""
         flash[:message] = "You need to fill name to create a Pattern."
