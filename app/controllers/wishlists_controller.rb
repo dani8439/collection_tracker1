@@ -65,7 +65,7 @@ class WishlistsController < ApplicationController
       @wishlist = Wishlist.find_by_id(params[:id])
       @wishlist.update(piece_name: params[:piece_name], piece_size: params[:piece_size], pattern_name: params[:pattern_name], quantity: params[:quantity], user_id: session[:user_id])
 
-      flash[:message] = "Successfully updated wishlist."
+      flash[:message] = "Successfully updated item on your wishlist."
       redirect :"/wishlists/#{@wishlist.id}"
     else
       redirect :'/login'

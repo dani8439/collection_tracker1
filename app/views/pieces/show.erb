@@ -4,7 +4,7 @@
 <h2>Size: <%= @piece.size %></h2>
 <br>
 
-<h3>In Patterns</h3>
+<h3>In Patterns:</h3>
 <% @piece.patterns.each do |pattern| %>
 <ul>
   <li><a href="/patterns/<%= pattern.id %>"><%= pattern.name %></li>

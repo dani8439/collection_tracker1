@@ -1,0 +1,28 @@
+<h1>Edit item:</h1>
+
+<form action="/wishlists/<%= @wishlist.id %>" method="POST">
+  <input type="hidden" name="_method" value="PATCH">
+  <label for="piece_name">Edit Name: <input type="text" name="piece_name" id="piece_name" value="<%= @wishlist.piece_name %>"></label><br></br>
+  <label for="piece_size">Edit Size: <input type="text" name="piece_size" id="piece_size" value="<%= @wishlist.piece_size %>"></label><br></br>
+  <label for="pattern_name">Edit Pattern: <input type="text" name="pattern_name" id="pattern_name" value="<%= @wishlist.pattern_name %>"></label><br></br>
+  <label for="quantity">Edit Quantity: <input type="text" name="quantity" id="quantity" value="<%= @wishlist.quantity %>"></label><br></br>
+
+  <input type="submit" value="Update Item">
+
+</form>
+<br></br>
+
+<h3><a href="/wishlists/new">Add an Item to Your Wishlist</a></h3><br>
+
+<br></br>
+<% if flash.has?(:message) %>
+  <div class="message"><%= flash[:message] %> </div>
+<% end %>
+<br></br>
+
+
+<a href="/patterns">See Your Patterns</a><br>
+<a href="/pieces">See Your Collection</a><br>
+<a href="/wishlists">Your Wishlist</a><br>
+<a href="/pieces">Home</a><br>
+<a href="/logout">Log Out</a>

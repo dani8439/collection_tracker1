@@ -1,4 +1,4 @@
-<h2><%= @wishlist.quantity %> - <%= @wishlist.pattern_name%> <%= @wishlist.piece_size%> <%= @wishlist.piece_name %>  </h2>
+<h2><%= @wishlist.quantity %> - <%= @wishlist.pattern_name%> <%= @wishlist.piece_size%> <%= @wishlist.piece_name %>(s)</h2>
 
 <br></br>
 <a href="/wishlists/<%= @wishlist.id %>/edit">Edit Wishlist Item</a>
@@ -8,6 +8,11 @@
   <input id="hidden" type="hidden" name="_method" value="DELETE">
   <input type="submit" id="submit" value="Delete Item from Wishlist">
 </form>
+
+<br></br>
+<% if flash.has?(:message) %>
+  <div class="message"><%= flash[:message] %> </div>
+<% end %>
 
 <h3><a href="/wishlists">Your Wishlist</a></h3>
 

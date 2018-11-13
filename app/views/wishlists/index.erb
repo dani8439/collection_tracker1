@@ -9,8 +9,12 @@
 </ul>
 <% end %>
 
+<br></br>
+<% if flash.has?(:message) %>
+  <div class="message"><%= flash[:message] %> </div>
+<% end %>
 
-<a href="/wishlists/new">Add an Item to Your Wishlist</a><br>
+<h3><a href="/wishlists/new">Add an Item to Your Wishlist</a></h3><br>
 
 <br></br>
 <a href="/pieces/new">Add a New Piece</a><br>

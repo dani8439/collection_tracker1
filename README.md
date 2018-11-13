@@ -7,6 +7,8 @@ A Sinatra App to keep pottery collections organized:
 
 * Collections can be viewed by patterns, and what pieces they own of each.
 
+* Users can also access the Wishlist feature, creating a compiled list of items they would most like to have next.
+
 ## Usage ##
 
 To use collection_tracker1:

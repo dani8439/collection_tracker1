@@ -8,7 +8,7 @@
   <li><a href="/pieces/<%= piece.id %>"><%= piece.patterns.count %> - <%= piece.size %> <%= piece.name %>(s)</a></li><br>
     <% piece.patterns.each do |pattern| %>
     <ul>
-      <li><%= pattern.name %></li>
+      <li><a href="/patterns/<%= pattern.id%> "><%= pattern.name %></a></li>
     </ul>
     <% end %>
 </ul>
