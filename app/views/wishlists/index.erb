@@ -1,0 +1,17 @@
+<h1>Hello <%= current_user.username%>!</h1>
+
+<h2>Here is your Wishlist</h2>
+
+<% @wishlist = current_user.wishlists %>
+<% @wishlist.each do |wishlist| %>
+<ul>
+  <li><%= wishlist.quantity%> - <%= wishlist.pattern_name %> <%= wishlist.piece_size%> <%= wishlist.piece_name %>(s)</li><br>
+</ul>
+<% end %>
+
+
+
+<a href="/pieces/new">Add a New Piece</a><br>
+<a href="/patterns/new">Add a New Pattern</a><br>
+<a href="/patterns">See Your Patterns</a><br>
+<a href="/logout">Log Out </a><br>

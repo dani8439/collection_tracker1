@@ -75,7 +75,7 @@ class PatternsController < ApplicationController
     if logged_in?
       @user = User.find_by(params[:user_id])
       @pattern = Pattern.find_by_id(params[:id])
-      @pattern.update(name: params[:pattern][:name])
+      @pattern.update(name: params[:pattern][:name], user_id: session[:user_id])
       @pattern.piece_ids = params[:pieces]
       if !params[:piece][:name].empty? && !params[:piece][:size].empty?
         @pattern.pieces << Piece.create(name: params[:piece][:name], size: params[:piece][:size], user_id: session[:user_id])

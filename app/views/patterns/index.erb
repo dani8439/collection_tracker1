@@ -5,10 +5,11 @@
 
 <% @patterns = current_user.patterns %>
 <% @patterns.uniq.each do |pattern| %>
-<ul>
-  <li><a href="/patterns/<%= pattern.id %>"><%= pattern.name %> </li><br>
-</ul>
+  <ul>
+    <li><a href="/patterns/<%= pattern.id %>"><%= pattern.name %> </li><br>
+  </ul>
 <% end %>
+
 
 <br></br>
 <% if flash.has?(:message) %>
