@@ -1,5 +1,13 @@
 <h2><%= @wishlist.quantity %> - <%= @wishlist.pattern_name%> <%= @wishlist.piece_size%> <%= @wishlist.piece_name %>  </h2>
 
+<br></br>
+<a href="/wishlists/<%= @wishlist.id %>/edit">Edit Wishlist Item</a>
+<br></br>
+
+<form action="/wishlists/<%=@wishlist.id%>/delete" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" id="submit" value="Delete Item from Wishlist">
+</form>
 
 <h3><a href="/wishlists">Your Wishlist</a></h3>
 
