@@ -42,24 +42,17 @@ class PiecesController < ApplicationController
   end
 
   post '/pieces' do
-    # binding.pry
     if logged_in?
       if params[:name] == "" || params[:size] == ""
         flash[:message] = "Please do not leave any fields blank."
         redirect :"/pieces/new"
-      elsif
-        @piece = Piece.find_by(name: params[:name], size: params[:size])
-        if current_user.pieces.include?(@piece)
-          flash[:message] = "Piece already exists."
-          redirect :'/pieces/new'
-        end
-      elsif
+      else
         @piece = current_user.pieces.build(name: params[:name], size: params[:size])
         @pattern = Pattern.find_by(name: params[:pattern][:name])
         if !params[:pattern][:name].empty?
           if current_user.patterns.include?(@pattern)
             flash[:message] = "Pattern already exists."
-            redirect :'/pieces/new'
+            redirect :"/pieces/new"
           end
           @piece.pattern_ids = params[:patterns]
           @piece.patterns << Pattern.create(name: params[:pattern][:name])
