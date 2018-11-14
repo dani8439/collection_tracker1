@@ -1,3 +1,8 @@
+body {
+  background-color: #FFFFFF;
+}
+
+header,
 h1 {
   text-align: center;
   color: #010101;
@@ -33,4 +38,9 @@ li {
   margin: 10px 0px;
   padding: 12px;
   vertical-align: middle;
+}
+
+/* Navigation */
+.navbar {
+  background-color: #FAF3F3;
 }

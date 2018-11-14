@@ -1,4 +1,4 @@
-# collection_tracker1
+# collection_tracker1 #
 A Sinatra App to keep pottery collections organized:
 
 * Users can add to the database pieces that they own, as well as the patterns that compromise their collections.
@@ -9,17 +9,19 @@ A Sinatra App to keep pottery collections organized:
 
 * Users can also access the Wishlist feature, creating a compiled list of items they would most like to have next.
 
+* Users can edit and delete pieces and patterns as needed.
+
 ## Usage ##
 
 To use collection_tracker1:
 
-* Clone this repository
+* Fork the repository and clone it.
 
-* Run `bundle install`
+* Run `bundle install` to install gems. If you don't have bundler, first run `gem install bundler`.
 
-* Run `rake db:migrate`
+* Run `rake db:migrate` to set up the database.
 
-* Run `shotgun`
+* Run `shotgun` to run the app locally.
 
 ### MIT License ###
 
