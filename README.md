@@ -27,4 +27,4 @@ To use collection_tracker1:
 
 https://github.com/dani8439/collection_tracker1/blob/PiecePatterns-Branch/LICENSE
 
-![Alt text](../public/images/Footer2.jpg)
+
