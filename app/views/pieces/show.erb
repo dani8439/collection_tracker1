@@ -13,14 +13,10 @@
 
 <a href="/pieces/<%= @piece.id %>/edit">Edit Piece </a>
 <br></br>
-ß
+
 <form action="/pieces/<%=@piece.id%>/delete" method="POST">
   <input id="hidden" type="hidden" name="_method" value="DELETE">
   <input type="submit" id="submit" value="Delete Piece">
 </form>
 
-<br></br>
-<% if flash.has?(:message) %>
-  <div class="message"><%= flash[:message] %> </div>
-<% end %>
 <br></br>

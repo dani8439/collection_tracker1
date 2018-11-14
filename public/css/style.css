@@ -29,12 +29,18 @@ h4 {
 
 li {
   font-size: 18px;
+  font-family: 'Frank Ruhl Libre', serif;
+}
+
+form {
+  font-size: 16px;
+  font-family: 'Frank Ruhl Libre', serif;
 }
 
 .message {
   font-size: 18px;
-  color: #00529B;
-  background-color: #BDE5f8;
+  color: #FFFFFF;
+  background-color: #F36545;
   margin: 10px 0px;
   padding: 12px;
   vertical-align: middle;
@@ -54,4 +60,12 @@ li {
   padding: 14px 16px;
   text-decoration: none;
   font-size: 18px;
+}
+
+.topnav a:hover {
+  color: #F36545;
+}
+
+.topnav a.active {
+  color: #F36545;
 }

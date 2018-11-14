@@ -24,8 +24,12 @@
         <% end %>
       </div>
     </header>
-
-    <%= yield %>
+      <%= yield %>
+    <footer>
+      <% if flash.has?(:message) %>
+        <div class="message"><%= flash[:message] %> </div>
+      <% end %>
+    </footer>
   </body>
 
 </html>
