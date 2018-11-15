@@ -61,11 +61,8 @@ div.container {
   overflow: hidden;
 }
 
-[class="col-1"] {
-  width: 75%;
-}
 
-[class="col-3"] {
+[class*="col-"] {
   width: 24%;
 }
 

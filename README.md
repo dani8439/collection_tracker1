@@ -3,7 +3,7 @@ A Sinatra App to keep pottery collections organized:
 
 * Users can add to the database pieces that they own, as well as the patterns that compromise their collections.
 
-* Collections can be grouped by pieces, and what patterns they own of each.
+* Collections can be viewed by pieces, and what patterns they own of each.
 
 * Collections can be viewed by patterns, and what pieces they own of each.
 
@@ -26,5 +26,3 @@ To use collection_tracker1:
 ### MIT License ###
 
 https://github.com/dani8439/collection_tracker1/blob/PiecePatterns-Branch/LICENSE
-
-
