@@ -56,13 +56,13 @@ input {
 /* Patterns Images */
 div.container {
   padding-top: 10%;
-  padding-bottom: 5%;
+  padding-bottom: 10%;
   display: block;
   overflow: hidden;
 }
 
 [class*="col-"] {
-  width: 100%;
+  width: 24%;
 }
 
 /* Navigation */
@@ -94,8 +94,8 @@ div.container {
 .footerimage {
   position: relative;
   left: 0;
-  bottom: 10px;
-  top: 350px;
+  bottom: 5px;
+  top: 200px;
   width: 100%;
   height: 144px;
   color: #F36545;
