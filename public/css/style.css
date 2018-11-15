@@ -1,3 +1,4 @@
+/* Text/formatting */
 body {
   background-color: #FFFFFF;
 }
@@ -50,6 +51,18 @@ input {
   margin: 10px 0px;
   padding: 12px;
   vertical-align: middle;
+}
+
+/* Patterns Images */
+div.container {
+  padding-top: 10%;
+  padding-bottom: 5%;
+  display: block;
+  overflow: hidden;
+}
+
+[class*="col-"] {
+  width: 100%;
 }
 
 /* Navigation */
