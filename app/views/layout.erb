@@ -11,11 +11,33 @@
     <header>
       <div class="topnav" id="myTopnav">
         <% if logged_in? %>
-          <a href="/pieces" class="active">Home</a>
-          <a href="/patterns">Patterns</a>
-          <a href="/wishlists">Wishlist</a>
-          <a href="/pieces/new">Add Piece</a>
-          <a href="/patterns/new">Add Pattern</a>
+          <div class="dropdown">
+            <button class="dropbtn">Pieces
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="/pieces">Pieces</a>
+              <a href="/pieces/new">Add New Piece</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <button class="dropbtn">Patterns
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="/patterns">Patterns</a>
+              <a href="/patterns/new">Add New Pattern</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <button class="dropbtn">Wishlist
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="/wishlists">Wishlist</a>
+              <a href="/wishlists/new">Add Item to Wishlist</a>
+            </div>
+          </div>
           <a href="/logout">Logout</a>
         <% else %>
           <a href="/signup">Signup</a>
