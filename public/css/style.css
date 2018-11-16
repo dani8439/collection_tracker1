@@ -55,15 +55,17 @@ input {
 
 /* Patterns Images */
 div.container {
-  padding-top: 10%;
-  padding-bottom: 10%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  padding-left: 1%;
+  padding-right: 1%;
   display: block;
   overflow: hidden;
 }
 
 
 [class*="col-"] {
-  width: 24%;
+  width: 24.5%;
 }
 
 /* Navigation */
@@ -144,7 +146,7 @@ div.container {
   position: relative;
   left: 0;
   bottom: 5px;
-  top: 25px;
+  top: 5px;
   width: 100%;
   height: 144px;
   color: #F36545;

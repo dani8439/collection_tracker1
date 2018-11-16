@@ -6,8 +6,16 @@
 <% @patterns = current_user.patterns %>
 <% @patterns.uniq.each do |pattern| %>
   <ul>
-    <li><a href="/patterns/<%= pattern.id %>"><%= pattern.name %> </li><br>
+    <li><a href="/patterns/<%= pattern.id %>"><%= pattern.name %></a></li><br>
   </ul>
 <% end %>
 
 <br></br>
+
+
+<div class="container" id="pattern_pictures">
+  <img src="images/polkas2.jpg" class="col-3 wrapper">
+  <img src="images/indian_print.jpg" class="col-3 wrapper">
+  <img src="images/pink_litho.jpg" class="col-3 wrapper">
+  <img src="images/wallflower.jpg" class="col-3 wrapper">
+</div>
