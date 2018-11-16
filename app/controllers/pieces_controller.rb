@@ -56,7 +56,7 @@ class PiecesController < ApplicationController
             redirect :"/pieces/new"
           end
           @piece.pattern_ids = params[:patterns]
-          @piece.patterns << Pattern.create(name: params[:pattern][:name])
+          @piece.patterns << Pattern.create(name: params[:pattern][:name], user_id: session[:user_id])
           @piece.user_id = session[:user_id]
           @piece.save
         else
