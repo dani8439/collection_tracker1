@@ -23,6 +23,9 @@
           <a href="/">Home</a>
         <% end %>
       </div>
+      <% if flash.has?(:message) %>
+        <div class="message"><%= flash[:message] %> </div>
+      <% end %>
     </header>
       <%= yield %>
 
@@ -30,9 +33,6 @@
       <div class="container">
       </div>
     <footer>
-      <% if flash.has?(:message) %>
-        <div class="message"><%= flash[:message] %> </div>
-      <% end %>
       <div class="footerimage">
       </div>
     </footer>
