@@ -4,7 +4,6 @@ class PatternsController < ApplicationController
 
   get '/patterns' do
     @user = User.find_by(params[:id])
-    # @pattern = @user.patterns
     @pattern = Pattern.all
     if logged_in?
       erb :'/patterns/index'
@@ -25,6 +24,7 @@ class PatternsController < ApplicationController
     if logged_in?
       @pattern = Pattern.find_by_id(params[:id])
       @user = User.find_by(params[:id])
+      @wishlist = Wishlist.all
       erb :'patterns/show'
     else
       redirect :'/login'

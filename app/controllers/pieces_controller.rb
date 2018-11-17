@@ -25,6 +25,7 @@ class PiecesController < ApplicationController
   get '/pieces/:id' do
     if logged_in?
       @piece = Piece.find_by_id(params[:id])
+      @wishlist = Wishlist.all
       erb :'pieces/show'
     else
       redirect :'/login'

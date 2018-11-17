@@ -8,7 +8,15 @@
 <br></br>
 
 
+<h2>Items from your Wishlist in this Pattern: </h2>
+<% @wishlist.select{|wishlist| wishlist.pattern_name == @pattern.name}.each do |wishlist| %>
+  <ul>
+    <h3><a href="/wishlists/<%= wishlist.id%>"><%= wishlist.quantity%> - <%= wishlist.piece_size%> <%= wishlist.piece_name%>(s)</a></h3>
+  </ul>
+<% end %>
+
 <a href="/patterns/<%= @pattern.id %>/edit">Edit Pattern </a>
+<br></br>
 <br></br>
 
 <form action="/patterns/<%=@pattern.id%>/delete" method="POST">

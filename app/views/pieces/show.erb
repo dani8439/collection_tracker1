@@ -7,8 +7,15 @@
 <h3>In Patterns:</h3>
 <% @piece.patterns.each do |pattern| %>
 <ul>
-  <li><a href="/patterns/<%= pattern.id %>"><%= pattern.name %></li>
+  <li><a href="/patterns/<%= pattern.id %>"><%= pattern.name %></a></li>
 </ul>
+<% end %>
+
+<h2>Items from your Wishlist in this Piece: </h2>
+<% @wishlist.select{|wishlist| wishlist.piece_name == @piece.name && wishlist.piece_size == @piece.size}.each do |wishlist| %>
+  <ul>
+    <h3><a href="/wishlists/<%= wishlist.id%>"><%= wishlist.quantity%> - <%= wishlist.piece_size%> <%= wishlist.piece_name%>(s) in <%= wishlist.pattern_name%> </a></h3>
+  </ul>
 <% end %>
 
 <a href="/pieces/<%= @piece.id %>/edit">Edit Piece </a>
