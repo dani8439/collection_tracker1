@@ -48,7 +48,7 @@ class PiecesController < ApplicationController
       if params[:name] == "" || params[:size] == ""
         flash[:message] = "Please do not leave any fields blank."
         redirect :"/pieces/new"
-      else
+      else 
         @piece = current_user.pieces.build(name: params[:name], size: params[:size])
         @pattern = Pattern.find_by(name: params[:pattern][:name])
         if !params[:pattern][:name].empty?
