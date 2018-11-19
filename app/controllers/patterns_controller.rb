@@ -83,7 +83,7 @@ class PatternsController < ApplicationController
         @pattern.save
       end
       @pattern.save
-      flash[:message] = "Sucessfully updated pattern."
+      flash[:message] = "Successfully updated pattern."
       redirect :"patterns/#{@pattern.id}"
     else
       redirect :'/login'
