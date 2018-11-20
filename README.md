@@ -21,7 +21,6 @@ To use collection_tracker1:
 
 * Run `rake db:migrate` to set up the database.
 
-
 * Run `shotgun` to run the app locally.
 
 ### MIT License ###
