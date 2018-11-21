@@ -3,13 +3,16 @@ require 'pry'
 class PatternsController < ApplicationController
 
   get '/patterns' do
-    @user = User.find_by(params[:id])
-    @pattern = Pattern.all
-    if logged_in?
-      erb :'/patterns/index'
-    else
-      redirect :'/'
-    end
+    # @user = User.find_by(params[:id])
+    # @pattern = Pattern.all
+    redirect_if_not_logged_in
+    @patterns = current_user.patterns
+    erb :'/patterns/index'
+    # if logged_in?
+    #   erb :'/patterns/index'
+    # else
+    #   redirect :'/'
+    # end
   end
 
   get '/patterns/new' do
@@ -50,13 +53,14 @@ class PatternsController < ApplicationController
         redirect :'/patterns/new'
       else
         @pattern = Pattern.create(name: params[:pattern][:name])
-        @user = User.find_by(params[:id])
-        if @user.patterns.include?(@pattern)
+        # @user = User.find_by_id(params[:id]) not necessary
+        if current_user.patterns.include?(@pattern)
+        # if @user.patterns.include?(@pattern)
           flash[:message] = "Pattern already exists."
         elsif !params[:piece][:name].empty? && !params[:piece][:size].empty?
           @pattern.piece_ids = params[:pieces]
           @pattern.pieces << Piece.create(name: params[:piece][:name], size: params[:piece][:size], user_id: session[:user_id])
-          @pattern.save
+          # @pattern.save not necessary here as already saved in create. 
         else
           @pattern.piece_ids = params[:pieces]
           @pattern.user_id = session[:user_id]

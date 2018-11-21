@@ -37,8 +37,8 @@ class UsersController < ApplicationController
       redirect :'/signup'
     else
       @user = User.create(email: params[:email], username: params[:username], password: params[:password])
-      session[:user_id] = @user.id
-      @user.save
+      session[:user_id] = @user.id # setting session here, so don't need to resave the user.
+      # @user.save
       redirect :'/pieces'
     end
   end

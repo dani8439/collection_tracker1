@@ -33,6 +33,7 @@ class PiecesController < ApplicationController
   end
 
   get '/pieces/:id/edit' do
+    #  need to protect route so cannot access other uses info
     if logged_in?
       @piece = Piece.find_by_id(params[:id])
       erb :'/pieces/edit'

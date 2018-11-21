@@ -47,8 +47,9 @@ class WishlistsController < ApplicationController
         flash[:message] = "Please fill in all fields to add an item to your Wishlist."
         redirect :'/wishlists/new'
       else
-        @wishlist = Wishlist.create(piece_name: params[:piece_name], piece_size: params[:piece_size], pattern_name: params[:pattern_name], quantity: params[:quantity])
-        @wishlist.user_id = session[:user_id]
+        @wishlist = current_user.wishlists.build(piece_name: params[:piece_name], piece_size: params[:piece_size], pattern_name: params[:pattern_name], quantity: params[:quantity])
+        # @wishlist = Wishlist.create(piece_name: params[:piece_name], piece_size: params[:piece_size], pattern_name: params[:pattern_name], quantity: params[:quantity])
+        # @wishlist.user_id = session[:user_id] -- because wishlist has been built off of current_user, association is already there. 
         @wishlist.save
 
         flash[:message] = "Successfully added piece to your Wishlist."
