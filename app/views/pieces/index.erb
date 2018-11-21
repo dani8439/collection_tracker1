@@ -2,7 +2,6 @@
 
 <h2>Here is your collection</h2>
 
-<% @pieces = current_user.pieces %>
 <% @pieces.each do |piece| %>
 <ul>
   <li><a href="/pieces/<%= piece.id %>"><%= piece.patterns.count %> - <%= piece.size %> <%= piece.name %>(s)</a></li><br>

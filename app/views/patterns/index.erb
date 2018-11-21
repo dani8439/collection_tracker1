@@ -2,8 +2,6 @@
 
 <h2>Here are your Patterns</h2>
 
-
-
 <% @patterns.uniq.each do |pattern| %>
   <ul>
     <li><a href="/patterns/<%= pattern.id %>"><%= pattern.name %></a></li><br>

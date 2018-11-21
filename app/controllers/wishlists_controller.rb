@@ -3,86 +3,63 @@ require 'pry'
 class WishlistsController < ApplicationController
 
   get '/wishlists' do
-    @user = User.find_by(params[:id])
-    @wishlist = Wishlist.all
-    if logged_in?
-      erb :'/wishlists/index'
-    else
-      redirect :'/'
-    end
+    redirect_if_not_logged_in
+    @wishlist = current_user.wishlists
+    erb :'/wishlists/index'
   end
 
   get '/wishlists/new' do
-    if logged_in?
-      erb :'/wishlists/new'
-    else
-      redirect :'/'
-    end
+    redirect_if_not_logged_in
+    erb :'/wishlists/new'
   end
 
   get '/wishlists/:id' do
-    if logged_in?
-      @wishlist = Wishlist.find_by_id(params[:id])
-      @user = User.find_by(params[:id])
-      erb :'/wishlists/show'
-    else
-      redirect :'/login'
-    end
+    redirect_if_not_logged_in
+    @wishlist = Wishlist.find_by_id(params[:id])
+    @user = User.find_by(params[:id])
+    erb :'/wishlists/show'
   end
 
   get '/wishlists/:id/edit' do
-    if logged_in?
-      @wishlist = Wishlist.find_by_id(params[:id])
-      erb :'wishlists/edit'
-    else
-      flash[:message] = "You only have access to your Wishlist."
-      redirect :'/login'
-    end
+    redirect_if_not_logged_in
+    @wishlist = Wishlist.find_by_id(params[:id])
+    erb :'wishlists/edit'
   end
 
   post '/wishlists' do
     # binding.pry
-    if logged_in?
-      if params[:piece_name] == "" || params[:piece_size] == "" || params[:pattern_name] == "" || params[:quantity] == ""
-        flash[:message] = "Please fill in all fields to add an item to your Wishlist."
-        redirect :'/wishlists/new'
-      else
-        @wishlist = current_user.wishlists.build(piece_name: params[:piece_name], piece_size: params[:piece_size], pattern_name: params[:pattern_name], quantity: params[:quantity])
-        # @wishlist = Wishlist.create(piece_name: params[:piece_name], piece_size: params[:piece_size], pattern_name: params[:pattern_name], quantity: params[:quantity])
-        # @wishlist.user_id = session[:user_id] -- because wishlist has been built off of current_user, association is already there. 
-        @wishlist.save
-
-        flash[:message] = "Successfully added piece to your Wishlist."
-        redirect :"/wishlists/#{@wishlist.id}"
-      end
+    redirect_if_not_logged_in
+    if params[:piece_name] == "" || params[:piece_size] == "" || params[:pattern_name] == "" || params[:quantity] == ""
+      flash[:message] = "Please fill in all fields to add an item to your Wishlist."
+      redirect :'/wishlists/new'
     else
-      redirect :'/login'
+      @wishlist = current_user.wishlists.build(piece_name: params[:piece_name], piece_size: params[:piece_size], pattern_name: params[:pattern_name], quantity: params[:quantity])
+      # @wishlist = Wishlist.create(piece_name: params[:piece_name], piece_size: params[:piece_size], pattern_name: params[:pattern_name], quantity: params[:quantity])
+      # @wishlist.user_id = session[:user_id] -- because wishlist has been built off of current_user, association is already there.
+      @wishlist.save
+
+      flash[:message] = "Successfully added piece to your Wishlist."
+      redirect :"/wishlists/#{@wishlist.id}"
     end
   end
 
   patch '/wishlists/:id' do
-    if logged_in?
-      @user = User.find_by(params[:user_id])
-      @wishlist = Wishlist.find_by_id(params[:id])
-      @wishlist.update(piece_name: params[:piece_name], piece_size: params[:piece_size], pattern_name: params[:pattern_name], quantity: params[:quantity], user_id: session[:user_id])
+    redirect_if_not_logged_in
+    @user = User.find_by(params[:user_id])
+    @wishlist = Wishlist.find_by_id(params[:id])
+    @wishlist.update(piece_name: params[:piece_name], piece_size: params[:piece_size], pattern_name: params[:pattern_name], quantity: params[:quantity], user_id: session[:user_id])
 
-      flash[:message] = "Successfully updated item on your wishlist."
-      redirect :"/wishlists/#{@wishlist.id}"
-    else
-      redirect :'/login'
-    end
+    flash[:message] = "Successfully updated item on your wishlist."
+    redirect :"/wishlists/#{@wishlist.id}"
   end
 
   delete '/wishlists/:id/delete' do
-    if logged_in?
-      @wishlist = Wishlist.find_by_id(params[:id])
-      if @wishlist && @wishlist.user_id == session[:user_id]
-        @wishlist.delete
-      end
-      flash[:message] = "Item has been deleted from your wishlist."
-      redirect :'/wishlists'
-    else
-      redirect :'/login'
+    redirect_if_not_logged_in
+    @wishlist = Wishlist.find_by_id(params[:id])
+    if @wishlist && @wishlist.user_id == session[:user_id]
+      @wishlist.delete
     end
+    flash[:message] = "Item has been deleted from your wishlist."
+    redirect :'/wishlists'
   end
 end
