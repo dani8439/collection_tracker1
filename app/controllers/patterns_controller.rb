@@ -17,6 +17,7 @@ class PatternsController < ApplicationController
 
   get '/patterns/new' do
     redirect_if_not_logged_in
+    @pieces = current_user.pieces
     erb :'patterns/new'
   end
 
@@ -31,6 +32,7 @@ class PatternsController < ApplicationController
 
   get '/patterns/:id/edit' do
     redirect_if_not_logged_in
+    @pieces = current_user.pieces
     @pattern = Pattern.find_by_id(params[:id])
     erb :'patterns/edit'
   end

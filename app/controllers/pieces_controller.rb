@@ -10,6 +10,7 @@ class PiecesController < ApplicationController
 
   get '/pieces/new' do
     redirect_if_not_logged_in
+    @patterns = current_user.patterns
     erb :'pieces/new'
   end
 
@@ -23,6 +24,7 @@ class PiecesController < ApplicationController
   get '/pieces/:id/edit' do
     #  need to protect route so cannot access other uses info
     redirect_if_not_logged_in
+    @patterns = current_user.patterns
     @piece = Piece.find_by_id(params[:id])
     erb :'/pieces/edit'
   end

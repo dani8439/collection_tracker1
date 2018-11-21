@@ -4,7 +4,6 @@
   <label for="pattern_name">Pattern Name: <input type="text" name="pattern[name]" id="pattern_name"></label>
   <br></br>
   <h2>Available Pieces</h2>
-  <% @pieces = current_user.pieces %>
   <% @pieces.uniq.each do |piece| %>
     <input type="checkbox" name="pieces[]" id="<%= piece.id %>" value="<%= piece.id%>"><%= piece.size %> <%= piece.name%></input><br>
   <% end %>
