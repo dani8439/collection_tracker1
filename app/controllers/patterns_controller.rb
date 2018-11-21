@@ -29,12 +29,16 @@ class PatternsController < ApplicationController
     erb :'patterns/show'
   end
 
-
   get '/patterns/:id/edit' do
     redirect_if_not_logged_in
     @pieces = current_user.pieces
     @pattern = Pattern.find_by_id(params[:id])
-    erb :'patterns/edit'
+    if @pattern && @pattern.user_id == current_user.id
+      erb :'patterns/edit'
+    else
+      flash[:message] = "You only have access to your own patterns."
+      redirect :'/patterns'
+    end
   end
 
   post '/patterns' do

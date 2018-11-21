@@ -23,7 +23,12 @@ class WishlistsController < ApplicationController
   get '/wishlists/:id/edit' do
     redirect_if_not_logged_in
     @wishlist = Wishlist.find_by_id(params[:id])
-    erb :'wishlists/edit'
+    if @wishlist && @wishlist.user == current_user
+      erb :'wishlists/edit'
+    else
+      flash[:message] = "You only have access to your own Wishlist."
+      redirect :'/wishlists'
+    end
   end
 
   post '/wishlists' do

@@ -26,7 +26,12 @@ class PiecesController < ApplicationController
     redirect_if_not_logged_in
     @patterns = current_user.patterns
     @piece = Piece.find_by_id(params[:id])
-    erb :'/pieces/edit'
+    if @piece && @piece.user == current_user
+      erb :'/pieces/edit'
+    else
+      flash[:message] = "You only have access to your own pieces"
+      redirect :'/pieces'
+    end
   end
 
   post '/pieces' do
