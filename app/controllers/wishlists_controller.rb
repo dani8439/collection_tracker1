@@ -52,11 +52,17 @@ class WishlistsController < ApplicationController
     redirect_if_not_logged_in
     @user = User.find_by(params[:user_id])
     @wishlist = Wishlist.find_by_id(params[:id])
-    @wishlist.update(piece_name: params[:piece_name], piece_size: params[:piece_size], pattern_name: params[:pattern_name], quantity: params[:quantity], user_id: session[:user_id])
+    if @wishlist && @wishlist.user == current_user
+      @wishlist.update(piece_name: params[:piece_name], piece_size: params[:piece_size], pattern_name: params[:pattern_name], quantity: params[:quantity], user_id: session[:user_id])
 
-    flash[:message] = "Successfully updated item on your wishlist."
-    redirect :"/wishlists/#{@wishlist.id}"
+      flash[:message] = "Successfully updated item on your wishlist."
+      redirect :"/wishlists/#{@wishlist.id}"
+    else
+      flash[:message] = "You can only edit items on your wishlist."
+      redirect :'/wishlists'
+    end
   end
+
 
   delete '/wishlists/:id/delete' do
     redirect_if_not_logged_in

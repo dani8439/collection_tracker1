@@ -65,18 +65,24 @@ class PiecesController < ApplicationController
   patch '/pieces/:id' do
     # binding.pry
     redirect_if_not_logged_in
-    @user = User.find_by(params[:user_id])
+    # @user = User.find_by(params[:user_id])
     @piece = Piece.find_by_id(params[:id])
-    @piece.update(name: params[:name], size: params[:size])
-    @piece.pattern_ids = params[:patterns]
-    if !params[:pattern][:name].empty?
-      @piece.patterns << Pattern.create(name: params[:pattern][:name], user_id: session[:user_id])
-      @piece.user_id = session[:user_id]
-      @piece.save
+    if @piece && @piece.user == current_user
+      if @piece.update(name: params[:name], size: params[:size])
+        @piece.pattern_ids = params[:patterns]
+        if !params[:pattern][:name].empty?
+          @piece.patterns << Pattern.create(name: params[:pattern][:name], user_id: session[:user_id])
+          @piece.user_id = session[:user_id]
+          @piece.save
+        end
+        @piece.save
+        flash[:message] = "Successfully updated Piece."
+        redirect :"/pieces/#{@piece.id}"
+      end
+    else
+      flash[:message] = "You can only update your pieces."
+      redirect :'/pieces'
     end
-    @piece.save
-    flash[:message] = "Successfully updated Piece."
-    redirect :"/pieces/#{@piece.id}"
   end
 
 

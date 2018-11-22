@@ -70,18 +70,24 @@ class PatternsController < ApplicationController
   patch '/patterns/:id' do
     # binding.pry
     redirect_if_not_logged_in
-    @user = User.find_by(params[:user_id])
+    # @user = User.find_by(params[:user_id])
     @pattern = Pattern.find_by_id(params[:id])
-    @pattern.update(name: params[:pattern][:name], user_id: session[:user_id])
-    @pattern.piece_ids = params[:pieces]
-    if !params[:piece][:name].empty? && !params[:piece][:size].empty?
-      @pattern.pieces << Piece.create(name: params[:piece][:name], size: params[:piece][:size], user_id: session[:user_id])
-      @pattern.user_id = session[:user_id]
-      @pattern.save
+    if @pattern && @pattern.user_id == current_user.id
+      if @pattern.update(name: params[:pattern][:name], user_id: session[:user_id])
+        @pattern.piece_ids = params[:pieces]
+        if !params[:piece][:name].empty? && !params[:piece][:size].empty?
+          @pattern.pieces << Piece.create(name: params[:piece][:name], size: params[:piece][:size], user_id: session[:user_id])
+          @pattern.user_id = session[:user_id]
+          @pattern.save
+        end
+        @pattern.save
+        flash[:message] = "Successfully updated pattern."
+        redirect :"patterns/#{@pattern.id}"
+      end
+    else
+      flash[:message] = "You can only edit your patterns."
+      redirect :'/patterns'
     end
-    @pattern.save
-    flash[:message] = "Successfully updated pattern."
-    redirect :"patterns/#{@pattern.id}"
   end
 
 
