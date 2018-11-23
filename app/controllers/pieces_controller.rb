@@ -51,7 +51,6 @@ class PiecesController < ApplicationController
         @piece.pattern_ids = params[:patterns]
         @piece.patterns << Pattern.create(name: params[:pattern][:name], user_id: session[:user_id])
         @piece.user_id = session[:user_id]
-        @piece.save
       else
         @piece.pattern_ids = params[:patterns]
         @piece.user_id = session[:user_id]
@@ -73,7 +72,6 @@ class PiecesController < ApplicationController
         if !params[:pattern][:name].empty?
           @piece.patterns << Pattern.create(name: params[:pattern][:name], user_id: session[:user_id])
           @piece.user_id = session[:user_id]
-          @piece.save
         end
         @piece.save
         flash[:message] = "Successfully updated Piece."

@@ -56,7 +56,7 @@ class PatternsController < ApplicationController
       elsif !params[:piece][:name].empty? && !params[:piece][:size].empty?
         @pattern.piece_ids = params[:pieces]
         @pattern.pieces << Piece.create(name: params[:piece][:name], size: params[:piece][:size], user_id: session[:user_id])
-        # @pattern.save not necessary here as already saved in create.
+        # @pattern.save not necessary here as already saved in create..
       else
         @pattern.piece_ids = params[:pieces]
         @pattern.user_id = session[:user_id]
@@ -78,7 +78,6 @@ class PatternsController < ApplicationController
         if !params[:piece][:name].empty? && !params[:piece][:size].empty?
           @pattern.pieces << Piece.create(name: params[:piece][:name], size: params[:piece][:size], user_id: session[:user_id])
           @pattern.user_id = session[:user_id]
-          @pattern.save
         end
         @pattern.save
         flash[:message] = "Successfully updated pattern."
