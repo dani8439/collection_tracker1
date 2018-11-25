@@ -22,7 +22,6 @@ class PiecesController < ApplicationController
   end
 
   get '/pieces/:id/edit' do
-    #  need to protect route so cannot access other uses info
     redirect_if_not_logged_in
     @patterns = current_user.patterns
     @piece = Piece.find_by_id(params[:id])
@@ -64,7 +63,6 @@ class PiecesController < ApplicationController
   patch '/pieces/:id' do
     # binding.pry
     redirect_if_not_logged_in
-    # @user = User.find_by(params[:user_id])
     @piece = Piece.find_by_id(params[:id])
     if @piece && @piece.user == current_user
       if @piece.update(name: params[:name], size: params[:size])
