@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181112205822) do
+ActiveRecord::Schema.define(version: 2018_11_12_205822) do
 
   create_table "patterns", force: :cascade do |t|
-    t.string  "name"
+    t.string "name"
     t.integer "user_id"
   end
 
@@ -24,8 +23,8 @@ ActiveRecord::Schema.define(version: 20181112205822) do
   end
 
   create_table "pieces", force: :cascade do |t|
-    t.string  "name"
-    t.string  "size"
+    t.string "name"
+    t.string "size"
     t.integer "user_id"
   end
 
@@ -37,9 +36,9 @@ ActiveRecord::Schema.define(version: 20181112205822) do
 
   create_table "wishlists", force: :cascade do |t|
     t.integer "user_id"
-    t.string  "pattern_name"
-    t.string  "piece_name"
-    t.string  "piece_size"
+    t.string "pattern_name"
+    t.string "piece_name"
+    t.string "piece_size"
     t.integer "quantity"
   end
 
