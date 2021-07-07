@@ -1,4 +1,4 @@
-class CreateWishlists < ActiveRecord::Migration
+class CreateWishlists < ActiveRecord::Migration[4.2]
   def change
     create_table :wishlists do |t|
       t.integer :user_id
