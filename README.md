@@ -23,7 +23,7 @@ To use collection_tracker1:
 
 * Run `shotgun` to run the app locally, and navigate to the localhost url. 
 
-<img width="1414" alt="Screen Shot 2022-07-15 at 1 57 26 PM" src="https://user-images.githubusercontent.com/26771302/179283597-e803cc26-c57c-4efd-8c86-03c81a16a95c.png">
+<img width="1428" alt="Screen Shot 2022-07-15 at 2 01 36 PM" src="https://user-images.githubusercontent.com/26771302/179283957-ee82c24d-c3e2-4670-9613-b48d54b950f2.png">
 
 ### MIT License ###
 
