@@ -1,5 +1,3 @@
-<img width="1414" alt="Screen Shot 2022-07-15 at 1 57 26 PM" src="https://user-images.githubusercontent.com/26771302/179283597-e803cc26-c57c-4efd-8c86-03c81a16a95c.png">
-
 # collection_tracker1 #
 A Sinatra App to keep pottery collections organized:
 
@@ -12,8 +10,6 @@ A Sinatra App to keep pottery collections organized:
 * Users can also access the Wishlist feature, creating a compiled list of items they would most like to have next.
 
 * Users can edit and delete pieces and patterns as needed.
-* 
-<img width="1402" alt="Screen Shot 2022-07-15 at 1 57 38 PM" src="https://user-images.githubusercontent.com/26771302/179283551-53828ed8-5d27-4c60-a797-fcbd732a8b03.png">
 
 ## Usage ##
 
@@ -27,6 +23,7 @@ To use collection_tracker1:
 
 * Run `shotgun` to run the app locally, and navigate to the localhost url. 
 
+<img width="1414" alt="Screen Shot 2022-07-15 at 1 57 26 PM" src="https://user-images.githubusercontent.com/26771302/179283597-e803cc26-c57c-4efd-8c86-03c81a16a95c.png">
 
 ### MIT License ###
 
