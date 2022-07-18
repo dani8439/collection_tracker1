@@ -13,7 +13,7 @@ A Sinatra App to keep pottery collections organized:
 
 ## Usage ##
 
-To use collection_tracker1:
+For `Collection Tracker` to work, you need to be running `ruby v 2.7.0` on your computer.
 
 * Fork the repository and clone it.
 
