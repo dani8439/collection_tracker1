@@ -49,7 +49,7 @@ GEM
     mini_mime (1.1.2)
     minitest (5.16.2)
     multi_json (1.15.0)
-    mustermann (1.1.1)
+    mustermann (1.1.2)
       ruby2_keywords (~> 0.0.1)
     nokogiri (1.13.7-x86_64-darwin)
       racc (~> 1.4)
@@ -110,7 +110,7 @@ GEM
       tilt (~> 2.0)
     sinatra-reloader (1.0)
       sinatra-contrib
-    sqlite3 (1.3.13)
+    sqlite3 (1.4.4)
     thin (1.8.1)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
