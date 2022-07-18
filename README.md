@@ -13,6 +13,8 @@ A Sinatra App to keep pottery collections organized:
 
 ## Usage ##
 
+For `Collection Tracker` to work, you need to be running `ruby v 2.7.0` on your computer.
+
 * Fork the repository and clone it.
 
 * Run `bundle install` to install gems. If you don't have bundler, first run `gem install bundler`.
