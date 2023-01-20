@@ -4,7 +4,7 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 gem 'sinatra', require: 'sinatra/base'
 gem 'sinatra-reloader', require: false
-gem 'activerecord', '5.2.8.1', :require => 'active_record'
+gem 'activerecord', '6.1.7.1', :require => 'active_record'
 gem 'sinatra-activerecord', :require => 'sinatra/activerecord'
 gem 'sqlite3', '~> 1.3', '< 1.5'
 gem 'rake'
